@@ -1,0 +1,18 @@
+{
+  "workbench.colorTheme": "Solarized Light",
+  "bracketPairColorizer.showHorizontalScopeLine": false,
+  "bracketPairColorizer.showVerticalScopeLine": false,
+  "bracketPairColorizer.colorMode": "Consecutive",
+  "bracketPairColorizer.consecutivePairColors": [
+    "()",
+    "[]",
+    "{}",
+    [
+      "#5D5D5F",
+      "#7C4DFF",
+      "#00BEC4",
+      "#ff6500"
+    ],
+    "#e51400"
+  ]
+}
