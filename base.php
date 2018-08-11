@@ -24,6 +24,14 @@ function validate_avatar($avatar) {
   return in_array($avatar, $GLOBALS['AVATARS']);
 }
 
+function add_log($text) {
+  $db = db();
+  $row = $db->createRow('log', array(text => $text));
+  $db->begin();
+  $row->save();
+  $db->commit();
+}
+
 function get_user($name) {
   $db = db();
   return $db->table('user', $name);
@@ -68,6 +76,7 @@ function create_user($user) {
   $db->begin();
   $row->save();
   $db->commit();
+  add_log($user['name'].' joined.');
   return $db->user($user['name']);
 }
 
@@ -90,6 +99,7 @@ function update_message($user) {
   $db->begin();
   $existed_user->save();
   $db->commit();
+  add_log($user['name'].' updated her message.');
   return $existed_user;
 }
 
@@ -114,6 +124,7 @@ function offline_user($target_name, $user) {
   $db->begin();
   $target_user->save();
   $db->commit();
+  add_log($target_name.' is never active.');
   return $target_user;
 }
 

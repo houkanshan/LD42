@@ -42,3 +42,4 @@ No such user
 No such user
 No such user
 Not Allowed.
+Sorry, you should wait 12 hours before updating.
