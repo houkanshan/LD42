@@ -8,10 +8,10 @@ require_once('./libs/utils.php');
 date_default_timezone_set('UTC');
 
 define("FILE_LOG", "log.txt");
-define('AVATARS', array('0', '1', '2'));
 define('IP_LIMIT', 3);
 define('MIN_UPDATE_INTERVAL', 12); // hour
-define('ADMINS', array('Houmai', 'Zerotonin'));
+$GLOBALS['AVATARS'] = array('0', '1', '2');
+$GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
 
 function db() {
   $pdo = new \PDO( 'sqlite:db.sqlite3' );
@@ -21,7 +21,7 @@ function db() {
 }
 
 function validate_avatar($avatar) {
-  return in_array($avatar, AVATARS);
+  return in_array($avatar, $GLOBALS['AVATARS']);
 }
 
 function get_user($name) {
@@ -100,7 +100,7 @@ function get_all_users() {
 
 function offline_user($target_name, $user) {
   validate_permission($user);
-  if (!in_array($user['name'], ADMINS)) {
+  if (!in_array($user['name'], $GLOBALS['ADMINS'])) {
     raise_e('Not Allowed.');
   }
 
