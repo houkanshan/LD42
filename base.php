@@ -39,7 +39,7 @@ function get_user($name) {
 
 function validate_user($user) {
   return $user['password'] &&
-    $user['name'] && $user['message'] &&
+    $user['name'] &&
     validate_avatar($user['avatar']);
 }
 
@@ -82,6 +82,9 @@ function create_user($user) {
 
 function update_message($user) {
   validate_permission($user);
+  if (!$user['message']) {
+    raise_e("Message can't be empty.");
+  }
 
   $span = (new DateTime($existed_user['update_time']))->diff(new DateTime('now'));
   if (
@@ -124,7 +127,7 @@ function offline_user($target_name, $user) {
   $db->begin();
   $target_user->save();
   $db->commit();
-  add_log($target_name.' is never active.');
+  add_log($target_name.' is deactivated by '.$user['name']);
   return $target_user;
 }
 
