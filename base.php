@@ -12,6 +12,7 @@ define("VERSION", 19);
 define('FILE_LOG', "log.txt");
 define('IP_LIMIT', 100);
 define('MIN_UPDATE_INTERVAL', 12); // hour
+define('MIN_STORY_INTERVAL', 6); // hour
 $GLOBALS['AVATARS'] = range('1', '20');
 $GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
 
@@ -64,7 +65,6 @@ function validate_permission($user) {
   }
 
   $existed_user = get_user($user['name']);
-  echo json_encode($user);
   if (!$existed_user || $existed_user['password'] != $user['password']) {
     raise_e('Sorry, username / password mismatch.');
   }
@@ -134,6 +134,32 @@ function update_message($user) {
   $existed_user->save();
   $db->commit();
   add_log($user['name'].' updated her message.');
+  return $existed_user;
+}
+
+function update_story($user) {
+  validate_permission($user);
+  if (!$user['story']) {
+    raise_e("Success story can't be empty.");
+  }
+
+  $span = (new DateTime($existed_user['story_time']))->diff(new DateTime('now'));
+  if (
+    dateIntervalTimestamp($span) <
+    dateIntervalTimestamp(new DateInterval('PT'.MIN_STORY_INTERVAL.'H'))
+  ) {
+    raise_e("Sorry, you should wait ".MIN_STORY_INTERVAL." hours before updating.");
+  }
+
+  $existed_user->message = $user['story'];
+  $existed_user->update_time = getDbNow();
+  $existed_user->score = $existed_user['score'] + 3;
+
+  $db = db();
+  $db->begin();
+  $existed_user->save();
+  $db->commit();
+  add_log($user['name'].' updated her success story.');
   return $existed_user;
 }
 
