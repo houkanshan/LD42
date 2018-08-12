@@ -1,14 +1,22 @@
 {
   "dependencies": {
+    "@types/jquery": "^2.0.41",
     "autoprefixer-stylus": "^0.13.0",
-    "stylus": "^0.54.5"
+    "jquery": "^3.2.1",
+    "source-map-loader": "^0.2.1",
+    "stylus": "^0.54.5",
+    "ts-loader": "^2.0.3",
+    "typescript": "^2.2.2",
+    "webpack": "^2.4.1"
   },
   "name": "ld42",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "css": "./node_modules/stylus/bin/stylus -w -u autoprefixer-stylus --include-css -o ./dist/css ./css/index.styl"
+    "css": "./node_modules/stylus/bin/stylus -w -u autoprefixer-stylus --include-css -o ./dist/css ./css/index.styl",
+    "js": "./node_modules/webpack/bin/webpack.js -w"
+
   },
   "repository": {
     "type": "git",

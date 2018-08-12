@@ -4,7 +4,7 @@ require_once("base.php");
 header('Content-Type: application/json');
 
 $user = array(
-  'name' => trim($_POST['name'] || $_COOKIE['name']),
+  'name' => trim($_POST['name'] ? $_POST['name'] : $_COOKIE['name']),
   'raw_password' => $_POST['raw_password'],
   'password' => $_COOKIE['token'],
 );

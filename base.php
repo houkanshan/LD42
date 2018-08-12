@@ -7,11 +7,12 @@ require_once('./libs/utils.php');
 
 date_default_timezone_set('UTC');
 
-define('DEV', true);
+define('DEV', false);
+define("VERSION", 19);
 define('FILE_LOG', "log.txt");
 define('IP_LIMIT', 100);
 define('MIN_UPDATE_INTERVAL', 12); // hour
-$GLOBALS['AVATARS'] = array('0', '1', '2');
+$GLOBALS['AVATARS'] = range('1', '20');
 $GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
 
 if (DEV) {
@@ -43,27 +44,35 @@ function get_user($name) {
 }
 
 function validate_user($user) {
-  return ($user['raw_password'] || $user['password']) &&
-    $user['name'] &&
-    validate_avatar($user['avatar']);
+  if (!$user['name']) {
+    raise_e("Username can't be empty");
+  }
+  if (!$user['raw_password']) {
+    raise_e("Password can't be empty");
+  }
+  if (!validate_avatar($user['avatar'])) {
+    raise_e("Invalid avatar");
+  }
 }
 
 function validate_permission($user) {
+  if (!$user['name']) {
+    raise_e("Sorry, username can't be empty.");
+  }
   if ($user['raw_password']) {
     $user['password'] = md5($user['raw_password']);
   }
 
   $existed_user = get_user($user['name']);
+  echo json_encode($user);
   if (!$existed_user || $existed_user['password'] != $user['password']) {
     raise_e('Sorry, username / password mismatch.');
   }
+  return $existed_user;
 }
 
 function create_user($user) {
-  echo json_encode($user);
-  if (!validate_user($user)) {
-    raise_e('Invalid user.');
-  }
+  validate_user($user);
 
   $existed_user = get_user($user['name']);
   if ($existed_user) {
@@ -93,7 +102,7 @@ function create_user($user) {
 }
 
 function login_user($user) {
-  validate_permission($user);
+  $user = validate_permission($user);
   set_cookie('name', $user['name']);
   set_cookie('token', $user['password']);
 }
@@ -130,7 +139,15 @@ function update_message($user) {
 
 function get_all_users() {
   $db = db();
-  return $db->user()->fetchAll();
+  $users = $db->user()->fetchAll();
+  $users_data = array();
+  foreach($users as $u) {
+    $data = $u->getData();
+    unset($data['password']);
+    $data['ip'] = formatIp($data['ip']);
+    $users_data[] = $data;
+  }
+  return $users_data;
 }
 
 function offline_user($target_name, $user) {

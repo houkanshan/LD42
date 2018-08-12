@@ -1,2 +1,96 @@
+@require './leader-board'
+
 .account-main
   text-align: center
+  padding-top: 100px
+  .login-title
+    margin: 0 auto
+    width: 370px
+    font-size: 50px
+    line-height: 1
+    margin-bottom: 10px
+  .login-subtitle
+    margin: 0 auto
+    font-weight: normal
+    letter-spacing: 4px
+    color: $gray
+    font-size: 14px
+  .form-title
+    margin-top: 60px
+    margin-bottom: 10px
+    font-size: 20px
+  .field-avatar
+    display: inline-block
+    width: 94px
+    vertical-align: top
+    margin-right: 5px
+  .field-info
+    vertical-align: top
+    display: inline-block
+    .field
+      margin-bottom: 17px
+    input[type=text]
+      width: 235px
+  .field-label
+    display: block
+    text-align: left
+    font-size: 13px
+  .field-agree
+    width: 210px
+    font-size: 11px
+    color: $gray
+    margin: 0 auto
+    text-align: left
+    position: relative
+    input
+      position: absolute
+      left: -20px
+      top: 2px
+  .actions
+    margin-top: 20px
+    margin-bottom: 10px
+    button
+      width: 210px
+
+  .avatar-selector
+    text-align: left
+    position: relative
+    border: 1px solid $gray
+    padding: 1px
+    button
+      font-size: 12px
+      padding: 0 1px
+      height: 44px
+      vertical-align: top
+      margin-top: 14px
+      margin-left: 1px
+      margin-right: 1px
+    .avatar-value
+      height: 72px
+      .avatar-img
+        width: 70px
+        height: 70px
+        border: 1px solid black
+    &.focused .avatar-options
+      display: block
+    .avatar-options
+      display: none
+      font-size: 0
+      background: white
+      position: absolute
+      width: 235px
+      border: 1px solid $gray
+      margin-top: 1px
+      padding: 1px
+      left: -1px
+      z-index: 10
+      .avatar-img
+        width: 45px
+        height: 45px
+        margin: 1px
+        cursor: pointer
+  .error
+    text-align: left
+    color: $red
+    width: 210px
+    margin: 10px auto 0

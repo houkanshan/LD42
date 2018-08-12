@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'raw_password' => $_POST['raw_password'],
     );
     login_user($user);
+    redirect('/');
   } catch (Exception $e) {
     $error = $e->getMessage();
   }
@@ -35,23 +36,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include('./include/head.php') ?>
 <body>
   <div class="account-main">
-    <h1 class="login-title">More Players Are Welcomed</h1>
+    <h1 class="login-title">More Players Are Welcomed!</h1>
     <h2 class="login-subtitle">(but Seats Are Limited)</h2>
     <form class="account-form" action="./login.php" method="POST">
-      <div class="field">
-        <label class="field-label">Username</label>
-        <input type="text" name="name">
-      </div>
-      <div class="field">
-        <label class="field-label">Password</label>
-        <input type="text" name="raw_password">
+      <div class="form-title">Login</div>
+      <div class="field-info">
+        <div class="field">
+          <label class="field-label">Username</label>
+          <input type="text" name="name">
+        </div>
+        <div class="field">
+          <label class="field-label">Password</label>
+          <input type="text" name="raw_password">
+        </div>
       </div>
       <?php if ($error): ?>
         <div class="error">
           <?php echo $error ?>
         </div>
       <?php endif;?>
-      <div class="field">
+      <div class="actions">
         <button type="submit">Login</button>
       </div>
     </form>
@@ -59,6 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="./create.php">Create character</a>
     </p>
   </div>
+
+  <?php include('./include/header-board.php') ?>
   <?php include('./include/tail.php') ?>
+  <script>window.initAccountPage()</script>
 </body>
 </html>
