@@ -1,0 +1,55 @@
+@import './normalize.css'
+@require './font'
+@import './variables'
+
+body
+  background: $screenBg
+  color: $screenText
+  font: 12px/1.3 Arial
+  font-size: 12px
+  line-height: 1.3
+  width: 683px
+  word-break: break-word
+p
+  margin: 0
+  padding: 0
+
+table, td
+  border: 1px solid $borderColor
+table
+  width: 100%
+  table-layout: fixed
+tr
+  width: 683px
+td
+  padding: 0
+  position: relative
+
+label
+  position: absolute
+  top: 4px
+  left: 4px
+  font: 12px 'Segoe Script', 'Segoe Print', script
+  transform: scale(0.85)
+  transform-origin: top left
+  color: #929292
+  line-height: 1
+
+button
+  display: inline-block
+  color: black
+  border: 1px solid black
+  border-radius: 2px
+  height: 21px
+  line-height: 17px
+  background: linear-gradient(0deg, rgb(222,222,222) 0%, rgb(246,246,246) 100%)
+  cursor: pointer
+  outline: none
+  padding: 0 20px
+  &:active
+    background: linear-gradient(0deg, rgb(246,246,246) 0%, rgb(222,222,222) 100%)
+
+  &[disabled]
+    color: #999
+    border-color: #999
+    cursor: not-allowed

@@ -7,11 +7,16 @@ require_once('./libs/utils.php');
 
 date_default_timezone_set('UTC');
 
-define("FILE_LOG", "log.txt");
-define('IP_LIMIT', 3);
+define('DEV', true);
+define('FILE_LOG', "log.txt");
+define('IP_LIMIT', 100);
 define('MIN_UPDATE_INTERVAL', 12); // hour
 $GLOBALS['AVATARS'] = array('0', '1', '2');
 $GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
+
+if (DEV) {
+  header("Access-Control-Allow-Origin: *");
+}
 
 function db() {
   $pdo = new \PDO( 'sqlite:db.sqlite3' );
@@ -38,25 +43,27 @@ function get_user($name) {
 }
 
 function validate_user($user) {
-  return $user['password'] &&
+  return ($user['raw_password'] || $user['password']) &&
     $user['name'] &&
     validate_avatar($user['avatar']);
 }
 
 function validate_permission($user) {
-  $user['password'] = md5($user['password']);
+  if ($user['raw_password']) {
+    $user['password'] = md5($user['raw_password']);
+  }
 
   $existed_user = get_user($user['name']);
   if (!$existed_user || $existed_user['password'] != $user['password']) {
-    raise_e('Invalid user.');
+    raise_e('Sorry, username / password mismatch.');
   }
 }
 
 function create_user($user) {
+  echo json_encode($user);
   if (!validate_user($user)) {
     raise_e('Invalid user.');
   }
-
 
   $existed_user = get_user($user['name']);
   if ($existed_user) {
@@ -71,13 +78,28 @@ function create_user($user) {
   }
 
   $user['id'] = $users->rowCount();
-  $user['password'] = md5($user['password']);
-  $row = $db->createRow('user', $user);
+  $user['password'] = md5($user['raw_password']);
+  $row = $db->createRow('user', array(
+    'name' => $user['name'],
+    'password' => $user['password'],
+    'avatar' => $user['avatar'],
+    'ip' => $user['ip'],
+  ));
   $db->begin();
   $row->save();
   $db->commit();
   add_log($user['name'].' joined.');
   return $db->user($user['name']);
+}
+
+function login_user($user) {
+  validate_permission($user);
+  set_cookie('name', $user['name']);
+  set_cookie('token', $user['password']);
+}
+function logout_user() {
+  set_cookie('name', null);
+  set_cookie('token', null);
 }
 
 function update_message($user) {

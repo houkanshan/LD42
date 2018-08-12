@@ -44,3 +44,67 @@ No such user
 Not Allowed.
 Sorry, you should wait 12 hours before updating.
 Sorry, one IP can only create 3 accounts.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Sorry, one IP can only create 3 accounts.
+Invalid user.
+Sorry, one IP can only create 3 accounts.
+Invalid user.
+Sorry, one IP can only create 3 accounts.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Sorry, username existed.
+Invalid user.
+Invalid user.
+Sorry, username existed.
+Sorry, username existed.
+Sorry, one IP can only create 3 accounts.
+Invalid user.
+Invalid user.
+Invalid user.
+Sorry, username existed.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Sorry, username existed.
+Sorry, username existed.
+Invalid user.
+Invalid user.
+Sorry, username existed.
+Invalid user.
+Invalid user.
+Sorry, username existed.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Invalid user.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.

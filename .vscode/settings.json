@@ -14,5 +14,7 @@
       "#ff6500"
     ],
     "#e51400"
-  ]
+  ],
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false
 }

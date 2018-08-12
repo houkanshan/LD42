@@ -42,8 +42,8 @@ function get_ip() {
 
 function formatDateDiff($_start, $_end=null) {
   if(!($_start instanceof DateTime)) {
-      $start = new DateTime();
-      $start->setTimestamp($_start);
+    $start = new DateTime();
+    $start->setTimestamp($_start);
   }
 
   if($_end === null) {
@@ -114,6 +114,21 @@ function dateIntervalTimestamp($delta) {
     + ($delta->d * 60 * 60 * 24)
     + ($delta->m * 60 * 60 * 24 * 30)
     + ($delta->y * 60 * 60 * 24 * 365);
+}
+
+function set_cookie($name, $value) {
+  setcookie(
+    $name,
+    $value,
+    time() + (10 * 365 * 24 * 60 * 60)
+  );
+}
+
+function redirect($path) {
+  $url = 'http://' . $_SERVER['HTTP_HOST'];
+  $url .= rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+  $url .= $path;
+  header('Location: ' . $url, true, 302);
 }
 
 

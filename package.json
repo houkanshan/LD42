@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "autoprefixer-stylus": "^0.13.0",
+    "stylus": "^0.54.5"
+  },
+  "name": "ld42",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "css": "./node_modules/stylus/bin/stylus -w -u autoprefixer-stylus --include-css -o ./dist/css ./css/index.styl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/houkanshan/LD42.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/houkanshan/LD42/issues"
+  },
+  "description": ""
+}
