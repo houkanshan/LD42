@@ -1,2 +1,65 @@
 @require 'base'
 @require 'account'
+
+.main
+  .left
+    float: left
+    width: 386px
+  .right
+    overflow: hidden
+  .profile
+    border: 1px solid black
+    padding: 2px
+    overflow: hidden
+    .avatar
+      border: 1px solid black
+      float: left
+      margin-right: 2px
+      .avatar-img
+        width: 90px
+        height: 90px
+        display: block
+      .name
+        font-size: 13px
+        font-weight: bold
+        text-align: center
+        padding-top: 1px
+    .info
+      overflow: hidden
+    table
+      border-collapse: collapse
+      th, td
+        padding-top: 2px
+      td
+        text-align: center
+    .bio
+      border: 1px solid black
+      padding: 4px
+      margin-top: 2px
+      height: 60px
+      overflow: hidden
+      text-overflow: ellipsis
+  .actions
+    margin-top: 4px
+    text-align: center
+    button
+      padding: 0 10px
+      margin-right: 16px
+    .form-logout
+      display: inline
+      button
+        color: $red
+        margin-right: 0
+    .error
+      color: $red
+      margin: 4px 0
+      min-height: 15px
+
+  .players-list-container
+    .hd
+      background: $bgGray
+      text-align: center
+      font-weight: bold
+      font-size: 13px
+      border: 1px solid black
+      padding-top: 2px

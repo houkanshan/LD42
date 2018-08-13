@@ -3,12 +3,11 @@ import template from './template'
 import './avatar'
 declare const Data: any
 
-const tmplLeaderBoardItem = template($('#tmpl-leader-board-item').html())
-
 function initAccountPage() {
+  const tmplLeaderBoardItem = template($('#tmpl-leader-board-item').html())
   const listHtml = Data.users
   .filter(u => u.offline_time)
-  .filter(u => u.message)
+  .filter(u => u.story)
   .sort((a, b) => a.score - b.score)
   .map(function(u) {
     return tmplLeaderBoardItem(u)
