@@ -42,8 +42,8 @@ $user = get_user($user['name']);
               <tr>
                 <td><?php echo $user['create_time'] ?></td>
                 <td><?php echo formatIp($user['ip']) ?></td>
-                <td><?php echo $user['level'] ?></td>
-                <td><?php echo $user['score'] ?></td>
+                <td></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -73,7 +73,7 @@ $user = get_user($user['name']);
         </div>
       </div>
     </div>
-    <script type="template">
+    <script type="template" id="tmpl-player-card">
       <div class="player-card">
         <div class="avatar">
           <img src="/pics/avatars/{{- avatar }}.png" class="avatar-img">
@@ -81,7 +81,8 @@ $user = get_user($user['name']);
         </div>
         <div class="info">
           <div class="hd">
-            <b>{{- name }}</b> ({{- ip }})
+            <b>{{- name }}</b>
+            <span class="ip">({{- ip }})</span>
           </div>
           <div class="bd">
             {{- message }}
@@ -89,6 +90,13 @@ $user = get_user($user['name']);
         </div>
       </div>
     </script>
+    <div class="player-slots">
+      <span class="label">Player Slots</span>
+      <div class="progress">
+        <div class="bar"></div>
+        <div class="number">0/12</div>
+      </div>
+    </div>
   </div>
   <div class="right">
     <div class="fieldset">
@@ -100,6 +108,7 @@ $user = get_user($user['name']);
   <script>
     Data.me = <?php echo json_encode(get_user($user['name'])) ?>;
     Data.log = <?php echo json_encode(get_log()) ?>;
+    window.initMainPage();
   </script>
 </body>
 </html>

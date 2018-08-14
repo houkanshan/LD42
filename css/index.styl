@@ -1,5 +1,6 @@
 @require 'base'
 @require 'account'
+@require 'players-list'
 
 .main
   .left
@@ -56,10 +57,40 @@
       min-height: 15px
 
   .players-list-container
-    .hd
+    > .hd
       background: $bgGray
       text-align: center
       font-weight: bold
       font-size: 13px
       border: 1px solid black
       padding-top: 2px
+      border-bottom: none
+    #players-list
+      height: 410px
+      overflow-y: scroll
+      padding: 2px
+      border: 1px solid black
+
+  .player-slots
+    margin: 5px auto 40px
+    text-align: center
+    .label
+      font-size: 13px
+      font-weight: bold
+      display: inline-block
+    .progress
+      border: 1px solid black
+      width: 120px
+      height: 12px
+      display: inline-block
+      position: relative
+      margin-left: 5px
+    .bar
+      position: absolute
+      left: 0
+      top: 0
+      height: 100%
+      width: 40%
+      background: yellow
+    .number
+      font-weight: bold
