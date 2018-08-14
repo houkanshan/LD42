@@ -3,9 +3,11 @@
 @require 'players-list'
 
 .main
+  width: 718px
   .left
     float: left
     width: 386px
+    margin-right: 2px
   .right
     overflow: hidden
   .profile
@@ -95,3 +97,12 @@
       z-index: -1
     .number
       font-weight: bold
+
+  a.rules
+    float: right
+  #log
+    white-space: pre-line
+    background: $bgGray
+    height: 611px
+    border: 1px solid black
+    overflow-y: scroll

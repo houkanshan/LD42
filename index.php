@@ -100,6 +100,7 @@ $user = get_user($user['name']);
   </div>
   <div class="right">
     <div class="fieldset">
+      <a class="rules" href="javascript:;">Rules of The Game</a>
       <label>Figure 3.</label>
       <div id="log"></div>
     </div>
