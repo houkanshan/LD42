@@ -85,7 +85,7 @@ $user = get_user($user['name']);
             <span class="ip">({{- ip }})</span>
           </div>
           <div class="bd">
-            {{- message }}
+            {{- message || 'N/A' }}
           </div>
         </div>
       </div>
