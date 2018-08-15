@@ -1,8 +1,12 @@
 import * as $ from 'jquery'
 import template from './template'
+import parseUser from './parseUser'
 declare const Data: any
 
 function initMainPage() {
+  Data.users = Data.users.map(parseUser)
+  Data.me = parseUser(Data.me)
+
   const tmplPlayerCardItem = template($('#tmpl-player-card').html())
   const activePlayers = Data.users
     .filter(u => !u.offline_time)
@@ -23,10 +27,14 @@ function initMainPage() {
     )
   $('.player-slots .number').text(`${playerCount} / 12`)
 
-  // log
+  // Log
   $('#log').text(Data.log.map(function(l) {
     return `[${l.create_time}] ${l.text}`
   }).join('\n'))
+
+  // Profile
+  $('#my-level').text(Data.me.level)
+  $('#my-score').text(Data.me.score)
 }
 
 (window as any).initMainPage = initMainPage

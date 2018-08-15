@@ -42,8 +42,8 @@ $user = get_user($user['name']);
               <tr>
                 <td><?php echo $user['create_time'] ?></td>
                 <td><?php echo formatIp($user['ip']) ?></td>
-                <td></td>
-                <td></td>
+                <td id="my-level"></td>
+                <td id="my-score"></td>
               </tr>
             </tbody>
           </table>
