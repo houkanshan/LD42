@@ -218,7 +218,7 @@ function check_slots() {
   $last_time = $misc_values['last_checking_time'];
   $last_time = (new DateTime($last_time));
   $span = $last_time->diff(new DateTime('now'));
-  $interval_span = new DateInterval('PT'.CHECK_INTERVAL.'S');
+  $interval_span = new DateInterval('PT'.CHECK_INTERVAL.'H');
   if (
     dateIntervalTimestamp($span) > dateIntervalTimestamp($interval_span)
   ) {
