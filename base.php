@@ -13,6 +13,8 @@ define('FILE_LOG', "log.txt");
 define('IP_LIMIT', 100);
 define('MIN_UPDATE_INTERVAL', 12); // hour
 define('MIN_STORY_INTERVAL', 6); // hour
+define('PLAYER_SLOTS', 12); // hour
+define('CHECK_INTERVAL', 12); // hour
 $GLOBALS['AVATARS'] = range('1', '20');
 $GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
 
@@ -34,6 +36,16 @@ function validate_avatar($avatar) {
 function add_log($text) {
   $db = db();
   $row = $db->createRow('log', array(text => $text));
+  $db->begin();
+  $row->save();
+  $db->commit();
+}
+function add_log_time($text, $time) {
+  $db = db();
+  $row = $db->createRow('log', array(
+    text => $text,
+    create_time => $time,
+  ));
   $db->begin();
   $row->save();
   $db->commit();
@@ -200,4 +212,45 @@ function get_log() {
   return db()->log()->fetchAll();
 }
 
+function check_slots() {
+  $db = db();
+  $misc_values = $db->misc()->fetchAll()[0];
+  $last_time = $misc_values['last_checking_time'];
+  $last_time = (new DateTime($last_time));
+  $span = $last_time->diff(new DateTime('now'));
+  $interval_span = new DateInterval('PT'.CHECK_INTERVAL.'S');
+  if (
+    dateIntervalTimestamp($span) > dateIntervalTimestamp($interval_span)
+  ) {
+    $misc_values->last_checking_time = $last_time->add($interval_span);
+
+    $online_users = $db->user()->where('offline_time', null)->fetchAll();
+    $exceeded_count = count($online_users) - PLAYER_SLOTS;
+    $selected_users = array();
+    $now = getDbNow();
+    if ($exceeded_count > 0) {
+      $player_names = array();
+      $selected_indexes = array_rand($online_users, $exceeded_count);
+      foreach($selected_indexes as $i) {
+        $u = $online_users[$i];
+        $u->offline_time = $misc_values['last_checking_time'];
+        $selected_users[] = $online_users[$i];
+        $player_names[] = $u['name'];
+      }
+      add_log_time(
+        '['.implode('], [', $player_names).'] has been removed from the game by the admin to make space for future players',
+        $misc_values['last_checking_time']
+      );
+    }
+
+    $db->begin();
+    $misc_values->save();
+    foreach($selected_users as $u) {
+      $u->save();
+    }
+    $db->commit();
+  }
+}
+
+check_slots();
 ?>
