@@ -222,7 +222,8 @@ function check_slots() {
   if (
     dateIntervalTimestamp($span) > dateIntervalTimestamp($interval_span)
   ) {
-    $misc_values->last_checking_time = $last_time->add($interval_span);
+    $fake_check_time = $last_time->add($interval_span);
+    $misc_values->last_checking_time = getDbNow()
 
     $online_users = $db->user()->where('offline_time', null)->fetchAll();
     $exceeded_count = count($online_users) - PLAYER_SLOTS;
@@ -231,15 +232,18 @@ function check_slots() {
     if ($exceeded_count > 0) {
       $player_names = array();
       $selected_indexes = array_rand($online_users, $exceeded_count);
+      if ($exceeded_count == 1) {
+        $selected_indexes = [$selected_indexes];
+      }
       foreach($selected_indexes as $i) {
         $u = $online_users[$i];
-        $u->offline_time = $misc_values['last_checking_time'];
+        $u->offline_time = $fake_check_time;
         $selected_users[] = $online_users[$i];
         $player_names[] = $u['name'];
       }
       add_log_time(
         '['.implode('], [', $player_names).'] has been removed from the game by the admin to make space for future players',
-        $misc_values['last_checking_time']
+        $fake_check_time
       );
     }
 
