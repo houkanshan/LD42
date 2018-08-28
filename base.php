@@ -11,8 +11,8 @@ define('DEV', false);
 define("VERSION", 19);
 define('FILE_LOG', "log.txt");
 define('IP_LIMIT', 100);
-define('MIN_UPDATE_INTERVAL', 12); // hour
-define('MIN_STORY_INTERVAL', 6); // hour
+define('MIN_UPDATE_INTERVAL', 6); // hour
+define('MIN_STORY_INTERVAL', 12); // hour
 define('PLAYER_SLOTS', 12); // hour
 define('CHECK_INTERVAL', 12); // hour
 $GLOBALS['AVATARS'] = range('1', '20');
@@ -123,21 +123,25 @@ function logout_user() {
   set_cookie('token', null);
 }
 
+function can_update_message($existed_user) {
+  if ($existed_user['offline_time']) { return false; }
+  if (!$existed_user['update_time']) { return true; }
+  $span = (new DateTime($existed_user['update_time']))->diff(new DateTime('now'));
+  return dateIntervalTimestamp($span) >
+    dateIntervalTimestamp(new DateInterval('PT'.MIN_UPDATE_INTERVAL.'H'));
+}
+
 function update_message($user) {
-  validate_permission($user);
+  $existed_user = validate_permission($user);
   if (!$user['message']) {
     raise_e("Message can't be empty.");
   }
 
-  $span = (new DateTime($existed_user['update_time']))->diff(new DateTime('now'));
-  if (
-    dateIntervalTimestamp($span) <
-    dateIntervalTimestamp(new DateInterval('PT'.MIN_UPDATE_INTERVAL.'H'))
-  ) {
+  if (can_update_message($existed_user)) {
     raise_e("Sorry, you should wait ".MIN_UPDATE_INTERVAL." hours before updating.");
   }
 
-  $existed_user->message = $user['message'];
+  $existed_user->message = substr($user['message'], 0, 140);
   $existed_user->update_time = getDbNow();
   $existed_user->score = $existed_user['score'] + 5;
 
@@ -149,22 +153,26 @@ function update_message($user) {
   return $existed_user;
 }
 
+function can_update_story($existed_user) {
+  if ($existed_user['offline_time']) { return false; }
+  if (!$existed_user['story_time']) { return true; }
+  $span = (new DateTime($existed_user['story_time']))->diff(new DateTime('now'));
+  return dateIntervalTimestamp($span) >
+    dateIntervalTimestamp(new DateInterval('PT'.MIN_STORY_INTERVAL.'H'));
+}
+
 function update_story($user) {
-  validate_permission($user);
+  $existed_user = validate_permission($user);
   if (!$user['story']) {
     raise_e("Success story can't be empty.");
   }
 
-  $span = (new DateTime($existed_user['story_time']))->diff(new DateTime('now'));
-  if (
-    dateIntervalTimestamp($span) <
-    dateIntervalTimestamp(new DateInterval('PT'.MIN_STORY_INTERVAL.'H'))
-  ) {
+  if (can_update_story($existed_user)) {
     raise_e("Sorry, you should wait ".MIN_STORY_INTERVAL." hours before updating.");
   }
 
-  $existed_user->message = $user['story'];
-  $existed_user->update_time = getDbNow();
+  $existed_user->story = substr($user['story'], 200);
+  $existed_user->story_time = getDbNow();
   $existed_user->score = $existed_user['score'] + 3;
 
   $db = db();
@@ -223,7 +231,7 @@ function check_slots() {
     dateIntervalTimestamp($span) > dateIntervalTimestamp($interval_span)
   ) {
     $fake_check_time = $last_time->add($interval_span);
-    $misc_values->last_checking_time = getDbNow()
+    $misc_values->last_checking_time = getDbNow();
 
     $online_users = $db->user()->where('offline_time', null)->fetchAll();
     $exceeded_count = count($online_users) - PLAYER_SLOTS;

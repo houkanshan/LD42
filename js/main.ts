@@ -3,6 +3,36 @@ import template from './template'
 import parseUser from './parseUser'
 declare const Data: any
 
+const messageTips = [
+  'You may only edit your bio once per 12 hours.',
+  'Do not reveal your password to others or allow others to access your account.',
+  'Do not reveal your password to others even if requested by authorized admin(s).',
+  'Sauce up your bio info to display your best self.',
+  'You may also communicate with others or advertise yourself through your bio info.',
+  'Be friendly to others and pay attention to them.',
+  'Do not play video games at your workplace.',
+  'Be yourself, don\'t care what others think about you.',
+  'The best way to introduce yourself is to keep it short and succinct.',
+  'You may only edit your bio once per 12 hours.',
+]
+
+const storyTips = [
+  'You may only edit your shared success story once per 6 hours.',
+  'Believe in yourself, everyone’s a winner.',
+  'You are more than you might have thought.',
+  'We promise that we won’t use your success stories for anything other than inspiring other players.',
+  'Sharing is caring.',
+  'If you look close enough, every moment is a success.',
+  'Being human, being alive and staying alive, is a kind of success.',
+  'Get rid of all the distractions which might prevent you from achieving your goal, such as video games.',
+  'Don’t be a spammer, say something constructive.',
+  'You may only edit your shared success story once per 6 hours.',
+]
+
+$('.message-form .tip').text(messageTips[Math.floor(Math.random() * messageTips.length)])
+$('.story-form .tip').text(storyTips[Math.floor(Math.random() * storyTips.length)])
+
+
 function initMainPage() {
   Data.users = Data.users.map(parseUser)
   Data.me = parseUser(Data.me)
@@ -35,6 +65,31 @@ function initMainPage() {
   // Profile
   $('#my-level').text(Data.me.level)
   $('#my-score').text(Data.me.score)
+
+  // update message / story
+  $('.btn-message').on('click', function(e) {
+    const target = $(e.target)
+    if (Data.canUpdateMessage) {
+      setTimeout(function() {
+        target.closest('.btn-wrapper').addClass('is-open')
+      }, 1)
+    } else {
+      $('#profile-error').text('Sorry, you can only edit your bio once per 6 hours')
+    }
+  })
+  $('.btn-story').on('click', function(e) {
+    const target = $(e.target)
+    if (Data.canUpdateStory) {
+      target.closest('.btn-wrapper').addClass('is-open')
+    } else {
+      $('#profile-error').text('Sorry, you can only share your success story once per 12 hours')
+    }
+  })
+
+  $(document).on('click', function(e) {
+    if ($(e.target).closest('.is-open').length) { return }
+    $('.is-open').removeClass('is-open')
+  })
 }
 
 (window as any).initMainPage = initMainPage

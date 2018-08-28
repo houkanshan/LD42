@@ -51,16 +51,44 @@
     text-align: center
     button
       padding: 0 10px
-      margin-right: 16px
-    .form-logout
-      display: inline
-      button
-        color: $red
-        margin-right: 0
     .error
       color: $red
       margin: 4px 0
       min-height: 15px
+  .btn-wrapper
+    position: relative
+    display: inline-block
+    margin-right: 16px
+    form
+      display: none
+      position: absolute
+      z-index: 10
+      background: white
+      left: 0
+      top: 0
+      border: 1px solid black
+      padding: 5px
+    &.is-open form
+      display: block
+    textarea
+      width: 323px
+      height: 80px
+      display: block
+    .action
+      margin-top: 7px
+      text-align: left
+      overflow: hidden
+      button
+        float: right
+    .tip::before
+      content: 'Tips: '
+
+
+  .form-logout
+    display: inline
+    button
+      color: $red
+      margin-right: 0
 
   .players-list-container
     > .hd

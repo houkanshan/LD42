@@ -56,13 +56,31 @@ $user = get_user($user['name']);
       </div>
       <div class="actions">
         <div class="buttons">
-          <button type="button">Edit My Bio</button>
-          <button type="button">Share My Success Story</button>
+          <div class="btn-wrapper">
+            <button type="button" class="btn-message">Edit My Bio</button>
+            <form action="update_message.php" class="message-form">
+              <textarea name="message"></textarea>
+              <div class="action">
+                <button type="submit">Submit</button>
+                <span class="tip"></span>
+              </div>
+            </form>
+          </div>
+          <div class="btn-wrapper">
+            <button type="button" class="btn-story">Share My Success Story</button>
+            <form action="update_story.php" class="story-form">
+              <textarea name="story"></textarea>
+              <div class="action">
+                <button type="submit">Submit</button>
+                <span class="tip"></span>
+              </div>
+            </form>
+          </div>
           <form class="form-logout" action="./logout.php">
             <button>Log Out</button>
           </form>
         </div>
-        <div class="error"></div>
+        <div class="error" id="profile-error"></div>
       </div>
     </div>
     <div class="fieldset">
@@ -107,7 +125,9 @@ $user = get_user($user['name']);
   </div>
   <?php include('./include/tail.php') ?>
   <script>
-    Data.me = <?php echo json_encode(get_user($user['name'])) ?>;
+    Data.me = <?php echo json_encode($user) ?>;
+    Data.canUpdateMessage = <?php echo json_encode(can_update_message($user)) ?>;
+    Data.canUpdateStory = <?php echo json_encode(can_update_story($user)) ?>;
     Data.log = <?php echo json_encode(get_log()) ?>;
     window.initMainPage();
   </script>
