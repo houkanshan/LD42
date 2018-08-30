@@ -22,8 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'password' => $_COOKIE['token'],
   );
   try {
-    login_user($user);
-    redirect('/');
+    $user = login_user($user);
+    if ($user['offline_time']) {
+      $error = "Sorry, your account has been removed from the game for future players.";
+    } else {
+      redirect('/');
+    }
   } catch (Exception $e) {
     // echo $e->getMessage();
   }

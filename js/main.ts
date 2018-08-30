@@ -38,6 +38,8 @@ function initMainPage() {
   Data.me = parseUser(Data.me)
 
   const tmplPlayerCardItem = template($('#tmpl-player-card').html())
+  const userMap = Data.users.reduce((prev, next) => ({ ...prev, [next.name]: next}), {})
+
   const activePlayers = Data.users
     .filter(u => !u.offline_time)
   const listHtml = activePlayers
@@ -59,7 +61,9 @@ function initMainPage() {
 
   // Log
   $('#log').text(Data.log.map(function(l) {
-    return `[${l.create_time}] ${l.text}`
+    return `[${l.create_time}] ${l.text.replace(/\[(.+?)\]/g, function(m, p) {
+      return `[${p} (Lv.${userMap[p].level})]`
+    })}`
   }).join('\n'))
 
   // Profile

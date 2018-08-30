@@ -8,7 +8,11 @@ $user = array(
 try {
   login_user($user);
 } catch (Exception $e) {
-  redirect('/create.php');
+  if ($user['name']) {
+    redirect('/login.php');
+  } else {
+    redirect('/create.php');
+  }
 }
 
 $user = get_user($user['name']);
@@ -58,7 +62,7 @@ $user = get_user($user['name']);
         <div class="buttons">
           <div class="btn-wrapper">
             <button type="button" class="btn-message">Edit My Bio</button>
-            <form action="update_message.php" class="message-form">
+            <form action="update_message.php" class="message-form" method="POST">
               <textarea name="message"></textarea>
               <div class="action">
                 <button type="submit">Submit</button>
@@ -68,7 +72,7 @@ $user = get_user($user['name']);
           </div>
           <div class="btn-wrapper">
             <button type="button" class="btn-story">Share My Success Story</button>
-            <form action="update_story.php" class="story-form">
+            <form action="update_story.php" class="story-form" method="POST">
               <textarea name="story"></textarea>
               <div class="action">
                 <button type="submit">Submit</button>

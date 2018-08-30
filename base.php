@@ -117,6 +117,7 @@ function login_user($user) {
   $user = validate_permission($user);
   set_cookie('name', $user['name']);
   set_cookie('token', $user['password']);
+  return $user;
 }
 function logout_user() {
   set_cookie('name', null);
@@ -124,7 +125,6 @@ function logout_user() {
 }
 
 function can_update_message($existed_user) {
-  if ($existed_user['offline_time']) { return false; }
   if (!$existed_user['update_time']) { return true; }
   $span = (new DateTime($existed_user['update_time']))->diff(new DateTime('now'));
   return dateIntervalTimestamp($span) >
@@ -137,7 +137,11 @@ function update_message($user) {
     raise_e("Message can't be empty.");
   }
 
-  if (can_update_message($existed_user)) {
+  if ($existed_user['offline_time']) {
+    raise_e("Sorry, your account has been removed from the game for future players.");
+  }
+
+  if (!can_update_message($existed_user)) {
     raise_e("Sorry, you should wait ".MIN_UPDATE_INTERVAL." hours before updating.");
   }
 
@@ -154,7 +158,6 @@ function update_message($user) {
 }
 
 function can_update_story($existed_user) {
-  if ($existed_user['offline_time']) { return false; }
   if (!$existed_user['story_time']) { return true; }
   $span = (new DateTime($existed_user['story_time']))->diff(new DateTime('now'));
   return dateIntervalTimestamp($span) >
@@ -167,7 +170,11 @@ function update_story($user) {
     raise_e("Success story can't be empty.");
   }
 
-  if (can_update_story($existed_user)) {
+  if ($existed_user['offline_time']) {
+    raise_e("Sorry, your account has been removed from the game for future players.");
+  }
+
+  if (!can_update_story($existed_user)) {
     raise_e("Sorry, you should wait ".MIN_STORY_INTERVAL." hours before updating.");
   }
 
@@ -250,7 +257,7 @@ function check_slots() {
         $player_names[] = $u['name'];
       }
       add_log_time(
-        '['.implode('], [', $player_names).'] has been removed from the game by the admin to make space for future players',
+        '['.implode('], [', $player_names).'] has been removed from the game by the system to make space for future players',
         $fake_check_time
       );
     }
