@@ -94,6 +94,30 @@ function initMainPage() {
     if ($(e.target).closest('.is-open').length) { return }
     $('.is-open').removeClass('is-open')
   })
+
+  // Word count
+  $('textarea').each(function(i, _el) {
+    const el = $(_el)
+    const countEl = $('<span class="count">')
+    const min = el.data('min')
+    const max = el.data('max')
+    const form = el.closest('form')
+    const btn = form.find('button')
+    el.after(countEl)
+    el.on('input', function() {
+      const len = el.val().length
+      if (len < min) {
+        countEl.show().text('+' + (min - len))
+        btn.prop('disabled', true)
+      } else if (len > max) {
+        countEl.show().text('-' + (len - max))
+        btn.prop('disabled', true)
+      } else {
+        countEl.hide()
+        btn.prop('disabled', false)
+      }
+    }).trigger('input')
+  })
 }
 
 (window as any).initMainPage = initMainPage

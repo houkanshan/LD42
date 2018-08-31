@@ -186,7 +186,7 @@ function update_story($user) {
   $db->begin();
   $existed_user->save();
   $db->commit();
-  add_log($user['name'].' updated her success story.');
+  add_log('Player '.$user['name'].' shared his/her success story.');
   return $existed_user;
 }
 
@@ -257,7 +257,7 @@ function check_slots() {
         $player_names[] = $u['name'];
       }
       add_log_time(
-        '['.implode('], [', $player_names).'] has been removed from the game by the system to make space for future players',
+        'Player ['.implode('], [', $player_names).'] has been removed from the game by the system to make space for future players',
         $fake_check_time
       );
     }

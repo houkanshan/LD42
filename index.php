@@ -63,7 +63,7 @@ $user = get_user($user['name']);
           <div class="btn-wrapper">
             <button type="button" class="btn-message">Edit My Bio</button>
             <form action="update_message.php" class="message-form" method="POST">
-              <textarea name="message"></textarea>
+              <textarea name="message" data-min="15" data-max="140"></textarea>
               <div class="action">
                 <button type="submit">Submit</button>
                 <span class="tip"></span>
@@ -73,7 +73,7 @@ $user = get_user($user['name']);
           <div class="btn-wrapper">
             <button type="button" class="btn-story">Share My Success Story</button>
             <form action="update_story.php" class="story-form" method="POST">
-              <textarea name="story"></textarea>
+              <textarea name="story" data-min="15" data-max="200"></textarea>
               <div class="action">
                 <button type="submit">Submit</button>
                 <span class="tip"></span>
