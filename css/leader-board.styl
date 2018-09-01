@@ -1,27 +1,56 @@
 #leader-board
-  position: fixed
-  width: 378px
-  right: 0
-  top: 40px
-  padding-right: 116px
   background: white
-  .close
-    position: absolute
-    right: 0
-    top: 0
-    width: 16px
-    height: 16px
-    background: black
-    cursor: pointer
-  &.closed
-    display: none
-  th
-    padding: 10px 0
-    font-weight: normal
+  position: absolute
+  width: 414px
+  right: 3px
+  top: 8px
+  label
+    display: block
+    text-align: right
+  .table
+    overflow: hidden
+  table
+    border-top: none
+    position: relative
+    margin-top: -3px
+    &::before
+      content: ''
+      position: absolute
+      left: 0
+      right: 0
+      top: 3px
+      height: 1px
+      background: black
+  thead { opacity: 0; border: 0 none; height: 0; }
+  thead * { margin: 0; padding: 0; border: 0 none; height: 0px; }
+  .title-container
+    tr
+      height: 18px
+    td
+      background: $bgGray
+      text-align: center
+      padding-top: 1px
   .title
-    font-size: 16px
-    line-height: 1
-
+    font-weight: bold
+  tr
+    .rank::after
+      content: 'st'
+      font-size: 12px
+      font-weight: normal
+  tr:nth-child(10n + 1)
+    .rank::after
+      content: 'st'
+  tr:nth-child(10n + 2)
+    .rank::after
+      content: 'nd'
+  tr:nth-child(10n + 3)
+    .rank::after
+      content: 'rd'
+  .rank
+    width: 45px
+    text-align: center
+    font-size: 20px
+    font-weight: bold
   .leader-board-item
     .avatar
       width: 45px
@@ -31,10 +60,33 @@
     .player-info
       overflow: hidden
       vertical-align: top
-      padding: 9px
+      padding: 5px
       padding-bottom: 0
-      .bd
-        font-style: italic
-        text-overflow: ellipsis
-        overflow: hidden
-        white-space: nowrap
+      position: relative
+    .message-container
+      position: absolute
+      right: 2px
+      bottom: 2px
+      &:hover
+        .message-content
+          display: block
+          position: absolute
+          right: 0
+          top: 0
+          background: white
+          width: 240px
+          border: 1px solid
+          min-height: 50px
+          padding: 5px
+      .btn-message
+        border: 1px solid
+        background: $bgGray
+      .message-content
+        display: none
+    .score-container
+      text-align: center
+      line-height: 1
+      padding-top: 2px
+    .score
+      font-size: 28px
+      font-weight: bold

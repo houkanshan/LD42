@@ -1,7 +1,6 @@
 import * as $ from 'jquery'
 import template from './template'
-import parseUser from './parseUser'
-declare const Data: any
+import './leader-board'
 
 const messageTips = [
   'You may only edit your bio once per 12 hours.',
@@ -34,8 +33,6 @@ $('.story-form .tip').text(storyTips[Math.floor(Math.random() * storyTips.length
 
 
 function initMainPage() {
-  Data.users = Data.users.map(parseUser)
-  Data.me = parseUser(Data.me)
 
   const tmplPlayerCardItem = template($('#tmpl-player-card').html())
   const userMap = Data.users.reduce((prev, next) => ({ ...prev, [next.name]: next}), {})
@@ -65,6 +62,7 @@ function initMainPage() {
       return `[${p} (Lv.${userMap[p].level})]`
     })}`
   }).join('\n'))
+  $('#log')[0].scrollTop = $('#log')[0].scrollHeight
 
   // Profile
   $('#my-level').text(Data.me.level)

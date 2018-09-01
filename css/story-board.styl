@@ -1,0 +1,44 @@
+.leader-board-container
+  position: absolute
+  width: 378px
+  padding-right: 116px
+  right: 0
+  top: 8px
+  label
+    float: right
+
+#leader-board
+  background: white
+  .close
+    position: absolute
+    right: 0
+    top: 0
+    width: 16px
+    height: 16px
+    background: black
+    cursor: pointer
+  &.closed
+    display: none
+  th
+    padding: 10px 0
+    font-weight: normal
+  .title
+    font-size: 16px
+    line-height: 1
+
+  .leader-board-item
+    .avatar
+      width: 45px
+      height: 45px
+      float: left
+      vertical-align: top
+    .player-info
+      overflow: hidden
+      vertical-align: top
+      padding: 9px
+      padding-bottom: 0
+      .bd
+        font-style: italic
+        text-overflow: ellipsis
+        overflow: hidden
+        white-space: nowrap

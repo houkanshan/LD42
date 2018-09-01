@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </p>
   </div>
 
-  <?php include('./include/header-board.php') ?>
+  <?php include('./include/leader-board.php') ?>
   <?php include('./include/tail.php') ?>
   <script>window.initAccountPage()</script>
 </body>

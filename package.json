@@ -15,8 +15,8 @@
   "devDependencies": {},
   "scripts": {
     "css": "./node_modules/stylus/bin/stylus -w -u autoprefixer-stylus --include-css -o ./dist/css ./css/index.styl",
-    "js": "./node_modules/webpack/bin/webpack.js -w"
-
+    "js": "./node_modules/webpack/bin/webpack.js -w",
+    "php": "php -S localhost:8080"
   },
   "repository": {
     "type": "git",

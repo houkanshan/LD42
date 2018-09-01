@@ -20,7 +20,8 @@ $user = get_user($user['name']);
 <!DOCTYPE html>
 <html lang="en">
 <?php include('./include/head.php') ?>
-<body class="main">
+<body>
+  <div class="main">
   <div class="banner">
     <span class="close"></span>
   </div>
@@ -44,7 +45,7 @@ $user = get_user($user['name']);
             </thead>
             <tbody>
               <tr>
-                <td><?php echo $user['create_time'] ?></td>
+                <td><?php echo substr($user['create_time'], 0, 10) ?></td>
                 <td><?php echo formatIp($user['ip']) ?></td>
                 <td id="my-level"></td>
                 <td id="my-score"></td>
@@ -127,12 +128,19 @@ $user = get_user($user['name']);
       <div id="log"></div>
     </div>
   </div>
-  <?php include('./include/tail.php') ?>
+  </div>
+
+  <?php include('./include/leader-board.php') ?>
+
   <script>
+    Data = {};
     Data.me = <?php echo json_encode($user) ?>;
     Data.canUpdateMessage = <?php echo json_encode(can_update_message($user)) ?>;
     Data.canUpdateStory = <?php echo json_encode(can_update_story($user)) ?>;
     Data.log = <?php echo json_encode(get_log()) ?>;
+  </script>
+  <?php include('./include/tail.php') ?>
+  <script>
     window.initMainPage();
   </script>
 </body>
