@@ -29,15 +29,10 @@
     </td>
     <td class="info">
       <div class="player-info">
-        <div class="hd">{{- name}} ({{- ip }})</div>
-        <div class="bd">{{- create_date }} - {{- update_date }}</div>
+        <div class="hd"><span class="name">{{- name}}</span> (<span class="ip">{{- ip }}</span>)</div>
+        <div class="bd">{{- create_date }} — {{- update_date }}</div>
         <div class="ft">
-          <div class="message-container">
-            <div class="btn-message">Bio ▼</div>
-            <div class="message-content">
-              {{- message }}
-            </div>
-          </div>
+          <div class="btn-message" data-message="{{- message }}">Bio ▼</div>
         </div>
       </div>
     </td>

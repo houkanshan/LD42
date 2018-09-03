@@ -13,7 +13,23 @@ const listHtml = Data.users
   return tmplLeaderBoardItem(u)
 }).join('')
 
-$('.leader-board-container').html(listHtml)
-$('#leader-board').on('click', '.close', function(e) {
-  $(e.currentTarget).closest('#leader-board').addClass('closed')
+const container = $('.leader-board-container')
+container
+  .html(listHtml)
+  .on('mouseenter', '.btn-message', function(e) {
+    const target = $(e.target)
+    const text = target.data('message')
+    const offset = target.offset()
+    const message = $('<div class="message-content">')
+      .text(text || 'N/A')
+      .css({
+        top: offset.top,
+        left: offset.left + target.width() - 250,
+        width: 240,
+      }).appendTo(document.body)
+    target.data('popup', message)
+  })
+
+$(document.body).on('mouseleave', '.message-content', function(e) {
+  $(e.currentTarget).remove()
 })
