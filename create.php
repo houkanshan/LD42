@@ -29,8 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'password' => $_COOKIE['token'],
   );
   try {
-    login_user($user);
-    redirect('/');
+    $user = login_user($user);
+    if (!$user['offline_time']) {
+      redirect('/');
+    }
   } catch(Exception $e) {
     // echo $e->getMessage();
   }

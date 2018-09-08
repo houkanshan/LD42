@@ -16,6 +16,10 @@ try {
 }
 
 $user = get_user($user['name']);
+if ($user['offline_time']) {
+  redirect('/login.php');
+  return;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -29,5 +29,9 @@ export default function parseUser(user) {
   return user
 }
 
-Data.users = Data.users.map(parseUser)
-Data.me = parseUser(Data.me)
+if (Data.users) {
+  Data.users = Data.users.map(parseUser)
+}
+if (Data.me) {
+  Data.me = parseUser(Data.me)
+}

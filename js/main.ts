@@ -1,6 +1,7 @@
 import * as $ from 'jquery'
 import template from './template'
 import './leader-board'
+declare const Data: any
 
 const messageTips = [
   'You may only edit your bio once per 12 hours.',

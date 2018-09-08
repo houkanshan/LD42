@@ -3,6 +3,8 @@ require_once("base.php");
 
 $error = '';
 
+$user = array('name' => '');
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="field-info">
         <div class="field">
           <label class="field-label">Username</label>
-          <input type="text" name="name">
+          <input type="text" name="name" value="<?php echo $user['name'] ?>">
         </div>
         <div class="field">
           <label class="field-label">Password</label>
