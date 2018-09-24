@@ -134,5 +134,9 @@ function redirect($path) {
   header('Location: ' . $url, true, 302);
 }
 
+function noHTML($input, $encoding = 'UTF-8') {
+  return htmlentities($input, ENT_QUOTES | ENT_HTML5, $encoding);
+}
+
 
 ?>

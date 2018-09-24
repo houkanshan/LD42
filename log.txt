@@ -293,3 +293,17 @@ Sorry, username / password mismatch.
 Message can't be empty.
 Message can't be empty.
 Sorry, you should wait 6 hours before updating.
+Sorry, username existed.
+Not Allowed.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username / password mismatch.
+Sorry, username / password mismatch.

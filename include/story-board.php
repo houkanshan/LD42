@@ -1,25 +1,25 @@
-<div class="leader-board-container">
-  <div id="leader-board">
+<div class="story-board-wrapper">
+  <div id="story-board">
     <span class="close"></span>
     <table>
       <thead>
         <tr><th>
           <span class="title">- Success Stories Shared by Other Players -</span>
           <br>
-          (xxx)
+          (These are all real quotes from real players with real feelings)
         </th></tr>
       </thead>
-      <tbody class="leader-board-container">
+      <tbody class="story-board-container">
       </tbody>
     </table>
   </div>
 </div>
 
-<script id="tmpl-leader-board-item" type='template'>
-  <tr class="leader-board-item"><td>
+<script id="tmpl-story-board-item" type='template'>
+  <tr class="story-board-item"><td>
     <img src="pics/avatars/{{- avatar }}.png" class="avatar {{- test ? 'it' : '' }}">
     <div class="player-info">
-      <div class="hd">{{- name}} (Lv. {{- level}}) {{- update_time }} (UTC)</div>
+      <div class="hd"><span class="name">{{- name}}</span> (Lv. {{- level}}) {{- update_time }} (UTC)</div>
       <div class="bd message">{{- story }}</div>
     </div>
   </td></tr>

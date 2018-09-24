@@ -223,6 +223,29 @@ function offline_user($target_name, $user) {
   return $target_user;
 }
 
+function offline_users($target_names, $user) {
+  validate_permission($user);
+  if (!in_array($user['name'], $GLOBALS['ADMINS'])) {
+    raise_e('Not Allowed.');
+  }
+
+  $db = db();
+  $db->begin();
+  foreach($target_names as $target_name) {
+    $target_user = get_user($target_name);
+    if (!$target_user) {
+      raise_e('No user named '.$target_name);
+    }
+    $target_user->offline_time = getDbNow();
+    $target_user->save();
+  }
+  $db->commit();
+  add_log(
+    'Player ['.implode('], [', $target_names).'] has been removed from the game by admin to make space for future players'
+  );
+  return $target_names;
+}
+
 function get_log() {
   return db()->log()->fetchAll();
 }

@@ -1,4 +1,4 @@
-.leader-board-container
+.story-board-wrapper
   position: absolute
   width: 378px
   padding-right: 116px
@@ -7,7 +7,7 @@
   label
     float: right
 
-#leader-board
+#story-board
   background: white
   .close
     position: absolute
@@ -26,12 +26,24 @@
     font-size: 16px
     line-height: 1
 
-  .leader-board-item
+  .story-board-item
+    &.need-expand
+      .message
+        cursor: pointer
+        position relative
+        &::after
+          content: '▼'
+          position: absolute
+          bottom: -1px
+          right: -2px
     .avatar
       width: 45px
       height: 45px
       float: left
       vertical-align: top
+    .name
+      font-size: 13px
+      font-weight: bold
     .player-info
       overflow: hidden
       vertical-align: top
@@ -42,3 +54,4 @@
         text-overflow: ellipsis
         overflow: hidden
         white-space: nowrap
+        padding-right: 7px

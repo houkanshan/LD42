@@ -59,7 +59,7 @@ if ($user['offline_time']) {
           <p class="bio">
             <b>Bio:</b>
             <br>
-            <?php echo $user['message'] ?>
+            <?php echo $user['message'] ? $user['message'] : 'N/A' ?>
           </p>
         </div>
       </div>

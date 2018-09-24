@@ -9,7 +9,7 @@ $user = array('name' => '');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
     $user = array(
-      'name' => trim($_POST['name']),
+      'name' => substr(trim($_POST['name']), 0, 10),
       'raw_password' => $_POST['raw_password'],
     );
     login_user($user);
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="field">
           <label class="field-label">Password</label>
-          <input type="text" name="raw_password">
+          <input type="password" name="raw_password">
         </div>
       </div>
       <?php if ($error): ?>
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </p>
   </div>
 
-  <?php include('./include/leader-board.php') ?>
+  <?php include('./include/story-board.php') ?>
   <?php include('./include/tail.php') ?>
   <script>window.initAccountPage()</script>
 </body>

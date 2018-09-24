@@ -18,6 +18,7 @@ export default function parseUser(user) {
   const days = Math.floor(duration / DAY)
   const hours = Math.floor(duration / HOUR)
 
+  user.name = user.name.slice(0, 10)
   user.create_date = user.create_time.slice(0, 10)
   user.update_date = user.update_time && user.update_time.slice(0, 10)
   user.story_date = user.story_time && user.story_time.slice(0, 10)

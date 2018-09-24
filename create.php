@@ -6,7 +6,7 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $ip = get_ip();
   $user = array(
-    'name' => trim($_POST['name']),
+    'name' => substr(trim($_POST['name']), 0, 10),
     'raw_password' => $_POST['raw_password'],
     'message' => trim(str_replace("\n", " ", $_POST['message'])),
     'avatar' => $_POST['avatar'],
@@ -73,19 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="field-info">
             <div class="field">
               <label class="field-label">Username</label>
-              <input type="text" name="name" value="<?php echo $user['name'] ?>">
+              <input type="text" name="name" value="<?php echo $user['name'] ?>" max-length="10">
             </div>
             <div class="field">
               <label class="field-label">Password</label>
-              <input type="text" name="raw_password">
+              <input type="password" name="raw_password">
             </div>
         </div>
         <div class="field field-agree">
           <label class="field-checkbox">
             <input type="checkbox" name="agree" value="1">
-            Agree? Agree? Agree? Agree? Agree? Agree?
-            Agree? Agree? Agree? Agree? Agree? Agree?
-            Agree? Agree? Agree? Agree? Agree? Agree?
+            By clicking the checkbox, I agree to unconditionally accept all the terms and
+            decisions made by the admins.
           </label>
         </div>
       </div>
@@ -99,10 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </form>
     <p>
-      <a href="./login.php">Login</a>
+      <a href="./login.php">Already have an existing character? Login</a>
     </p>
   </div>
-  <?php include('./include/leader-board.php') ?>
+
+  <?php include('./include/story-board.php') ?>
   <?php include('./include/tail.php') ?>
   <script>window.initAccountPage()</script>
 </body>

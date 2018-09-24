@@ -1,6 +1,6 @@
 import * as $ from 'jquery'
 import template from './template'
-import './leader-board'
+import initLeaderBoard from './leader-board'
 declare const Data: any
 
 const messageTips = [
@@ -60,6 +60,7 @@ function initMainPage() {
   // Log
   $('#log').text(Data.log.map(function(l) {
     return `[${l.create_time}] ${l.text.replace(/\[(.+?)\]/g, function(m, p) {
+      if (!userMap[p]) { return `[${p}]`}
       return `[${p} (Lv.${userMap[p].level})]`
     })}`
   }).join('\n'))
@@ -117,6 +118,8 @@ function initMainPage() {
       }
     }).trigger('input')
   })
+
+  initLeaderBoard()
 }
 
 (window as any).initMainPage = initMainPage
