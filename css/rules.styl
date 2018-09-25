@@ -1,0 +1,25 @@
+@require './variables'
+
+.page-rules
+  .rules
+    background: $bgGray
+    border: 1px solid
+    position: relative
+    padding: 18px 18px
+    width: 546px
+    &::before
+      content: ''
+      position: absolute
+      top: 1px
+      left: @top
+      right: @top
+      bottom: @top
+      border: 1px solid
+  h5
+    font-size: 12px
+    margin: 0
+  ul, ol
+    padding-left: 20px
+    font-style: italic
+    strong
+      font-style: normal
