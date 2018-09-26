@@ -18,6 +18,7 @@
       <tbody class="leader-board-container">
       </tbody>
     </table>
+    <div id="leader-board-update-time"></div>
   </div>
 </div>
 

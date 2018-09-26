@@ -27,7 +27,9 @@ if ($user['offline_time']) {
 <body>
   <div class="main">
   <div class="banner">
-    <span class="close"></span>
+    <a href="javascript:window.open('./process.html', null, 'width=300,height=176,resizable,scrollbars=yes,status=1')">
+      <img src="/pics/banner2.jpg" width="717" height="125">
+    </a>
   </div>
   <div class="left">
     <div class="fieldset">

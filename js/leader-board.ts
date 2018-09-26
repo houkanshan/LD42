@@ -5,14 +5,15 @@ declare const Data: any
 
 export default function() {
   const tmplLeaderBoardItem = template($('#tmpl-leader-board-item').html())
-  const listHtml = Data.users
-  .filter(u => !!u.offline_time)
-  .sort((a, b) => b.score - a.score)
-  .slice(0, 9)
-  .map(function(u, index) {
-    u.index = index
-    return tmplLeaderBoardItem(u)
-  }).join('')
+  const offlineUsers = Data.users
+    .filter(u => !!u.offline_time)
+  const listHtml = offlineUsers
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 9)
+    .map(function(u, index) {
+      u.index = index
+      return tmplLeaderBoardItem(u)
+    }).join('')
 
   const container = $('.leader-board-container')
   container
@@ -31,8 +32,14 @@ export default function() {
       target.data('popup', message)
     })
 
+  $('#leader-board-update-time').text(
+    offlineUsers.sort((a, b) =>
+      b.offline_time === a.offline_time ? 0 :
+        b.offline_time > a.offline_time ? 1 : -1
+    )[0].offline_time
+  )
+
   $(document.body).on('mouseleave', '.message-content', function(e) {
     $(e.currentTarget).remove()
   })
-
 }
