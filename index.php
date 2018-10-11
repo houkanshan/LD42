@@ -28,7 +28,7 @@ if ($user['offline_time']) {
   <div class="main">
   <div class="banner">
     <a href="javascript:window.open('./process.html', null, 'width=300,height=176,resizable,scrollbars=yes,status=1')">
-      <img src="/pics/banner2.jpg" width="717" height="125">
+      <img src="pics/banner2.jpg" width="717" height="125">
     </a>
   </div>
   <div class="left">
@@ -36,7 +36,7 @@ if ($user['offline_time']) {
       <label>Figure 1.</label>
       <div class="profile">
         <div class="avatar">
-          <img src="/pics/avatars/<?php echo $user['avatar'] ?>.png" class="avatar-img">
+          <img src="pics/avatars/<?php echo $user['avatar'] ?>.png" class="avatar-img">
           <div class="name"><?php echo $user['name'] ?></div>
         </div>
         <div class="info">
@@ -105,7 +105,7 @@ if ($user['offline_time']) {
     <script type="template" id="tmpl-player-card">
       <div class="player-card">
         <div class="avatar">
-          <img src="/pics/avatars/{{- avatar }}.png" class="avatar-img">
+          <img src="pics/avatars/{{- avatar }}.png" class="avatar-img">
           <div class="level">Lvl.{{- level }}</div>
         </div>
         <div class="info">

@@ -2,3 +2,4 @@ toilet*
 WYBJMekc8hmvNeHHbbq8Fr.php
 node_modules
 dist
+*.sqlite3
