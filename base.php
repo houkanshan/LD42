@@ -178,7 +178,7 @@ function update_story($user) {
     raise_e("Sorry, you should wait ".MIN_STORY_INTERVAL." hours before updating.");
   }
 
-  $existed_user->story = substr($user['story'], 200);
+  $existed_user->story = substr($user['story'], 0, 200);
   $existed_user->story_time = getDbNow();
   $existed_user->score = $existed_user['score'] + 3;
 
