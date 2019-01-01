@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1 class="login-title">More Players Are Welcomed!</h1>
     <h2 class="login-subtitle">(but Seats Are Limited)</h2>
     <form class="account-form" action="./login.php" method="POST">
-      <div class="form-title">Login</div>
+      <div class="form-title">Login with an Existing Character</div>
       <div class="field-info">
         <div class="field">
           <label class="field-label">Username</label>
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </form>
     <p>
-      <a href="./create.php">Create character</a>
+      <a href="./create.php">Back to the new character creation page</a>
     </p>
   </div>
 

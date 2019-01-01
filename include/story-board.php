@@ -1,6 +1,6 @@
 <div class="story-board-wrapper">
   <div id="story-board">
-    <a class="da-knil" href="/centrifuge/LD42/" target="_blank"></a>
+    <a class="da-knil" href="/centrifuge/LD41/" target="_blank"></a>
     <table>
       <thead>
         <tr><th>
