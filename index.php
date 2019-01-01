@@ -137,6 +137,7 @@ if ($user['offline_time']) {
   </div>
 
   <?php include('./include/leader-board.php') ?>
+  <?php include('./include/copyright.php') ?>
 
   <script>
     Data = {};

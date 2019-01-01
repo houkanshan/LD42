@@ -331,3 +331,49 @@ Sorry, username can't be empty.
 Sorry, username can't be empty.
 Sorry, username / password mismatch.
 Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Username can't be empty
+Password can't be empty
+Error: The password must not be shorter than 5 characters due to safety concerns.
+Error: The password must not be shorter than 5 characters due to safety concerns.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Error: An active player with the same username already exists.
+Error: An active player with the same username already exists.
+Error: An active player with the same username already exists.
+Error: Your username must be between 3 - 10 characters.
+Error: Please fill in all fields before proceeding.
+Error: Your username must be between 3 - 10 characters.
+Sorry, username can't be empty.
+Sorry, username can't be empty.
+Error: Your username must be between 3 - 10 characters.
+Error: Please fill in all fields before proceeding.
+Error: Each individual IP address is only allowed to possess up to 3 characters.

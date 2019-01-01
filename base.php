@@ -10,7 +10,7 @@ date_default_timezone_set('UTC');
 define('DEV', false);
 define("VERSION", 19);
 define('FILE_LOG', "log.txt");
-define('IP_LIMIT', 100);
+define('IP_LIMIT', 3);
 define('MIN_UPDATE_INTERVAL', 6); // hour
 define('MIN_STORY_INTERVAL', 12); // hour
 define('PLAYER_SLOTS', 12); // hour
@@ -58,10 +58,18 @@ function get_user($name) {
 
 function validate_user($user) {
   if (!$user['name']) {
-    raise_e("Username can't be empty");
+    raise_e("Error: Please fill in all fields before proceeding.");
   }
   if (!$user['raw_password']) {
-    raise_e("Password can't be empty");
+    raise_e("Error: Please fill in all fields before proceeding.");
+  }
+  $len = strlen($user['name']);
+  if ($len > 10 || $len < 3) {
+    raise_e("Error: Your username must be between 3 - 10 characters.");
+  }
+  $len = strlen($user['raw_password']);
+  if ($len < 5) {
+    raise_e("Error: The password must not be shorter than 5 characters due to safety concerns.");
   }
   if (!validate_avatar($user['avatar'])) {
     raise_e("Invalid avatar");
@@ -88,14 +96,14 @@ function create_user($user) {
 
   $existed_user = get_user($user['name']);
   if ($existed_user) {
-    raise_e('Sorry, username existed.');
+    raise_e('Error: An active player with the same username already exists.');
   }
 
   $db = db();
   $users = $db->user();
 
-  if ($users->count("'ip' = '".$user['ip']."'") >= IP_LIMIT) {
-    raise_e('Sorry, one IP can only create '.IP_LIMIT.' accounts.');
+  if ($users->where('offline_time', null)->count("'ip' = '".$user['ip']."'") >= IP_LIMIT) {
+    raise_e('Error: Each individual IP address is only allowed to possess up to '.IP_LIMIT.' characters.');
   }
 
   $user['id'] = $users->rowCount();
@@ -193,6 +201,9 @@ function update_story($user) {
 function get_all_users() {
   $db = db();
   $users = $db->user()->fetchAll();
+
+
+
   $users_data = array();
   foreach($users as $u) {
     $data = $u->getData();

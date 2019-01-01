@@ -6,18 +6,18 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $ip = get_ip();
   $user = array(
-    'name' => substr(trim($_POST['name']), 0, 10),
+    'name' => substr(trim($_POST['name']), 0, 20),
     'raw_password' => $_POST['raw_password'],
     'message' => trim(str_replace("\n", " ", $_POST['message'])),
     'avatar' => $_POST['avatar'],
     'ip' => $ip,
   );
   try {
-    if (!$_POST['agree']) {
-      throw new Exception('You should agree');
-    }
     $new_user = create_user($user);
     login_user($new_user);
+    if (!$_POST['agree']) {
+      throw new Exception('Please tick the checkbox to ensure your optimal gaming experience.');
+    }
     redirect('/');
   } catch (Exception $e) {
     $error = $e->getMessage();
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="./login.php">Already have an existing character? Login</a>
     </p>
   </div>
-
+  <?php include('./include/copyright.php') ?>
   <?php include('./include/story-board.php') ?>
   <?php include('./include/tail.php') ?>
   <script>window.initAccountPage()</script>
