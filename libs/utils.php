@@ -106,8 +106,11 @@ function raise_e($log) {
 function getDbNow() {
   return date('Y-m-d H:i:s');
 }
-function getDbDate($time) {
+function getDbDate($date) {
   return $date->format('Y-m-d H:i:s');
+}
+function formatDate($str) {
+  return (new DateTime($str))->format('D, j M Y');
 }
 
 function dateIntervalTimestamp($delta) {

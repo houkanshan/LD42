@@ -29,8 +29,10 @@ const storyTips = [
   'You may only edit your shared success story once per 6 hours.',
 ]
 
-$('.message-form .tip').text(messageTips[Math.floor(Math.random() * messageTips.length)])
-$('.story-form .tip').text(storyTips[Math.floor(Math.random() * storyTips.length)])
+function updateTips() {
+  $('.message-form .tip').text(messageTips[Math.floor(Math.random() * messageTips.length)])
+  $('.story-form .tip').text(storyTips[Math.floor(Math.random() * storyTips.length)])
+}
 
 
 function initMainPage() {
@@ -78,7 +80,7 @@ function initMainPage() {
         target.closest('.btn-wrapper').addClass('is-open')
       }, 1)
     } else {
-      $('#profile-error').text('Sorry, you can only edit your bio once per 6 hours')
+      $('#profile-error').text('Sorry, you can only edit your bio once per 12 hours')
     }
   })
   $('.btn-story').on('click', function(e) {
@@ -86,13 +88,15 @@ function initMainPage() {
     if (Data.canUpdateStory) {
       target.closest('.btn-wrapper').addClass('is-open')
     } else {
-      $('#profile-error').text('Sorry, you can only share your success story once per 12 hours')
+      $('#profile-error').text('Sorry, you can only share your success story once per 6 hours')
     }
   })
 
+  updateTips()
   $(document).on('click', function(e) {
     if ($(e.target).closest('.is-open').length) { return }
     $('.is-open').removeClass('is-open')
+    updateTips()
   })
 
   // Word count
@@ -118,6 +122,14 @@ function initMainPage() {
       }
     }).trigger('input')
   })
+
+  // Log out
+  $('.form-logout').on('submit', function(e) {
+    if (!confirm('Are you sure you want to log out?')) {
+      e.preventDefault()
+    }
+  })
+
 
   initLeaderBoard()
 }

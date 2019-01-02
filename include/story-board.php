@@ -19,7 +19,7 @@
   <tr class="story-board-item"><td>
     <img src="pics/avatars/{{- avatar }}.png" class="avatar {{- test ? 'it' : '' }}">
     <div class="player-info">
-      <div class="hd"><span class="name">{{- name}}</span> (Lv. {{- level}}) {{- update_time }} (UTC)</div>
+      <div class="hd"><span class="name">{{- name}}</span> (Lv. {{- level}}) {{- formatDate(update_time) }}</div>
       <div class="bd message">{{- story }}</div>
     </div>
   </td></tr>

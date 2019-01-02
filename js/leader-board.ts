@@ -1,5 +1,6 @@
 import * as $ from 'jquery'
 import template from './template'
+import formatDate from './formatDate'
 import './avatar'
 declare const Data: any
 
@@ -12,7 +13,7 @@ export default function() {
     .slice(0, 9)
     .map(function(u, index) {
       u.index = index
-      return tmplLeaderBoardItem(u)
+      return tmplLeaderBoardItem({ ...u, formatDate })
     }).join('')
 
   const container = $('.leader-board-container')
@@ -33,10 +34,10 @@ export default function() {
     })
 
   $('#leader-board-update-time').text(
-    offlineUsers.sort((a, b) =>
+    formatDate(offlineUsers.sort((a, b) =>
       b.offline_time === a.offline_time ? 0 :
         b.offline_time > a.offline_time ? 1 : -1
-    )[0].offline_time
+    )[0].offline_time) + ' +0000'
   )
 
   $(document.body).on('mouseleave', '.message-content', function(e) {

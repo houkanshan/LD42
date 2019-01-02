@@ -11,8 +11,8 @@ define('DEV', false);
 define("VERSION", 19);
 define('FILE_LOG', "log.txt");
 define('IP_LIMIT', 3);
-define('MIN_UPDATE_INTERVAL', 6); // hour
-define('MIN_STORY_INTERVAL', 12); // hour
+define('MIN_UPDATE_INTERVAL', 12); // hour
+define('MIN_STORY_INTERVAL', 6); // hour
 define('PLAYER_SLOTS', 12); // hour
 define('CHECK_INTERVAL', 12); // hour
 $GLOBALS['AVATARS'] = range('1', '20');
@@ -64,8 +64,8 @@ function validate_user($user) {
     raise_e("Error: Please fill in all fields before proceeding.");
   }
   $len = strlen($user['name']);
-  if ($len > 10 || $len < 3) {
-    raise_e("Error: Your username must be between 3 - 10 characters.");
+  if ($len > 10 || $len < 3 || strpos($user['name'], ' ') !== false) {
+    raise_e("Error: Your username must be between 3 - 10 characters with no space.");
   }
   $len = strlen($user['raw_password']);
   if ($len < 5) {
@@ -78,7 +78,10 @@ function validate_user($user) {
 
 function validate_permission($user) {
   if (!$user['name']) {
-    raise_e("Sorry, username can't be empty.");
+    raise_e("Error: Please fill in all fields before proceeding.");
+  }
+  if (!$user['password'] && !$user['raw_password']) {
+    raise_e("Error: Please fill in all fields before proceeding.");
   }
   if ($user['raw_password']) {
     $user['password'] = md5($user['raw_password']);
@@ -86,7 +89,7 @@ function validate_permission($user) {
 
   $existed_user = get_user($user['name']);
   if (!$existed_user || $existed_user['password'] != $user['password']) {
-    raise_e('Sorry, username / password mismatch.');
+    raise_e('Error: The username or password you entered is incorrect.');
   }
   return $existed_user;
 }

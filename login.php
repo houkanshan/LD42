@@ -9,11 +9,15 @@ $user = array('name' => '');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
     $user = array(
-      'name' => substr(trim($_POST['name']), 0, 10),
+      'name' => trim($_POST['name']),
       'raw_password' => $_POST['raw_password'],
     );
-    login_user($user);
-    redirect('/');
+    $user = login_user($user);
+    if ($user['offline_time']) {
+      $error = "The character you previously logged into has been removed from the game to make space for future players. You can still rejoin the game by creating a new character.";
+    } else {
+      redirect('/');
+    }
   } catch (Exception $e) {
     $error = $e->getMessage();
   }
@@ -26,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
     $user = login_user($user);
     if ($user['offline_time']) {
-      $error = "Sorry, your account has been removed from the game for future players.";
+      $error = "The character you previously logged into has been removed from the game to make space for future players. You can still rejoin the game by creating a new character.";
     } else {
       redirect('/');
     }

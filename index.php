@@ -8,6 +8,8 @@ $user = array(
 try {
   login_user($user);
 } catch (Exception $e) {
+
+  error_log(print_r($e->getMessage(), TRUE));
   if ($user['name']) {
     redirect('/login.php');
   } else {
@@ -51,7 +53,7 @@ if ($user['offline_time']) {
             </thead>
             <tbody>
               <tr>
-                <td><?php echo substr($user['create_time'], 0, 10) ?></td>
+                <td><?php echo formatDate($user['create_time']) ?></td>
                 <td><?php echo formatIp($user['ip']) ?></td>
                 <td id="my-level"></td>
                 <td id="my-score"></td>

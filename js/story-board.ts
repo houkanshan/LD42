@@ -1,5 +1,6 @@
 import * as $ from 'jquery'
 import template from './template'
+import formatDate from './formatDate'
 import './avatar'
 declare const Data: any
 
@@ -10,7 +11,7 @@ export default function() {
   .filter(u => u.story)
   .sort((a, b) => a.story_time > b.story_time ? 1 : -1)
   .map(function(u) {
-    return tmplStoryBoardItem(u)
+    return tmplStoryBoardItem({ ...u, formatDate })
   }).join('')
 
   const container = $('.story-board-container')
