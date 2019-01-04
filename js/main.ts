@@ -1,5 +1,5 @@
 import * as $ from 'jquery'
-import template from './template'
+import template, { escape } from './template'
 import initLeaderBoard from './leader-board'
 declare const Data: any
 
@@ -60,11 +60,15 @@ function initMainPage() {
   $('.player-slots .number').text(`${playerCount} / 12`)
 
   // Log
-  $('#log').text(Data.log.map(function(l) {
-    return `[${l.create_time}] ${l.text.replace(/\[(.+?)\]/g, function(m, p) {
-      if (!userMap[p]) { return `[${p}]`}
-      return `[${p} (Lv.${userMap[p].level})]`
-    })}`
+  $('#log').html(Data.log.map(function(l) {
+    let text = escape(l.text).replace(/\[(.+?)( \(\))?\]/g, function(m, p1, p2) {
+      if (!userMap[p1]) { return `<b>[${p1}]</b>`}
+      if (p2) {
+        return `<b>[${p1} (Lv.${userMap[p1].level})]</b>`
+      }
+      return `<b>[${p1}]</b>`
+    })
+    return `[${l.create_time}] ${text}`
   }).join('\n'))
   $('#log')[0].scrollTop = $('#log')[0].scrollHeight
 

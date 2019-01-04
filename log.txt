@@ -399,3 +399,49 @@ Error: Please fill in all fields before proceeding.
 Error: Please fill in all fields before proceeding.
 Error: Please fill in all fields before proceeding.
 Error: Please fill in all fields before proceeding.
+Success story can't be empty.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Your username must be between 3 - 10 characters with no space.
+Error: Each individual IP address is only allowed to possess up to 3 characters.
+Error: The username or password you entered is incorrect.
+Error: The username or password you entered is incorrect.
+Error: The username or password you entered is incorrect.
+Error: Each individual IP address is only allowed to possess up to 3 characters.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: An active player with the same username already exists.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: An active player with the same username already exists.
+Error: Please fill in all fields before proceeding.
+Error: The password must not be shorter than 5 characters due to safety concerns.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: The username or password you entered is incorrect.
+Error: Please fill in all fields before proceeding.
+Error: The password must not be shorter than 5 characters due to safety concerns.
+Error: An active player with the same username already exists.
+Error: Please fill in all fields before proceeding.
+Error: The username or password you entered is incorrect.
+Error: The username or password you entered is incorrect.
+Error: The username or password you entered is incorrect.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: An active player with the same username already exists.
+Error: The password must not be shorter than 5 characters due to safety concerns.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.
+Error: Please fill in all fields before proceeding.

@@ -14,7 +14,7 @@ define('IP_LIMIT', 3);
 define('MIN_UPDATE_INTERVAL', 12); // hour
 define('MIN_STORY_INTERVAL', 6); // hour
 define('PLAYER_SLOTS', 12); // hour
-define('CHECK_INTERVAL', 12); // hour
+define('CHECK_INTERVAL', 48); // hour
 $GLOBALS['AVATARS'] = range('1', '20');
 $GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
 
@@ -99,7 +99,7 @@ function create_user($user) {
 
   $existed_user = get_user($user['name']);
   if ($existed_user) {
-    raise_e('Error: An active player with the same username already exists.');
+    raise_e('Error: An player with the same username already exists.');
   }
 
   $db = db();
@@ -120,7 +120,11 @@ function create_user($user) {
   $db->begin();
   $row->save();
   $db->commit();
-  add_log($user['name'].' joined.');
+  add_log('Player ['.$user['name'].'] has joined the game.');
+
+  if ($users->count() == PLAYER_SLOTS) {
+    add_log('Maximum players reached, the countdown timer has been initialized.');
+  }
   return $db->user($user['name']);
 }
 
@@ -164,7 +168,7 @@ function update_message($user) {
   $db->begin();
   $existed_user->save();
   $db->commit();
-  add_log($user['name'].' updated her message.');
+  add_log('Player ['.$user['name'].'] has updated his/her bio.');
   return $existed_user;
 }
 
@@ -197,7 +201,7 @@ function update_story($user) {
   $db->begin();
   $existed_user->save();
   $db->commit();
-  add_log('Player '.$user['name'].' shared his/her success story.');
+  add_log('A new success story has been shared by Player ['.$user['name'].'].');
   return $existed_user;
 }
 
@@ -254,8 +258,9 @@ function offline_users($target_names, $user) {
     $target_user->save();
   }
   $db->commit();
+  $has = count($target_names) === 1 ? 'has' : 'have';
   add_log(
-    'Player ['.implode('], [', $target_names).'] has been removed from the game by admin to make space for future players'
+    'Player ['.implode(' ()], [', $target_names).' ()] '.$has.' been removed from the game by admin to make space for future players'
   );
   return $target_names;
 }
@@ -283,18 +288,23 @@ function check_slots() {
     $now = getDbNow();
     if ($exceeded_count > 0) {
       $player_names = array();
-      $selected_indexes = array_rand($online_users, $exceeded_count);
-      if ($exceeded_count == 1) {
-        $selected_indexes = [$selected_indexes];
-      }
+      // $selected_indexes = array_rand($online_users, $exceeded_count);
+      // if ($exceeded_count == 1) {
+      //   $selected_indexes = [$selected_indexes];
+      // }
+      $selected_indexes = range(0, count($online_users) - 1);
       foreach($selected_indexes as $i) {
         $u = $online_users[$i];
         $u->offline_time = $fake_check_time;
         $selected_users[] = $online_users[$i];
         $player_names[] = $u['name'];
       }
+      // add_log_time(
+      //   'Player ['.implode('], [', $player_names).'] has been removed from the game by the system to make space for future players',
+      //   $fake_check_time
+      // );
       add_log_time(
-        'Player ['.implode('], [', $player_names).'] has been removed from the game by the system to make space for future players',
+        'All active players have been automatically removed from the game by the system, due to the dereliction of duty of the admins.',
         $fake_check_time
       );
     }

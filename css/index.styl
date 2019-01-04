@@ -10,26 +10,28 @@ html, body
   margin: 0
 
 .main
-  width: 718px
+#leader-board
   label
     font: 12px 'Segoe Script', 'Segoe Print', script
-    transform: scale(0.85)
     transform-origin: top left
     line-height: 1
+
+.main
+  width: 718px
   .left
     float: left
     width: 386px
-    margin-right: 2px
+    margin-right: 1px
   .right
     overflow: hidden
   .profile
     border: 1px solid black
-    padding: 2px
+    padding: 1px
     overflow: hidden
     .avatar
       border: 1px solid black
       float: left
-      margin-right: 2px
+      margin-right: 1px
       .avatar-img
         width: 90px
         height: 90px
@@ -44,16 +46,17 @@ html, body
     table
       border-collapse: collapse
       th, td
-        padding-top: 2px
+        padding-top: 1px
       td
         text-align: center
     .bio
       border: 1px solid black
       padding: 4px
-      margin-top: 2px
-      height: 49px
+      margin-top: 1px
+      height: 52px
       overflow: hidden
       text-overflow: ellipsis
+      line-height: 1.2
     #my-level
     #my-score
       font-size: 20px
@@ -115,12 +118,12 @@ html, body
       font-weight: bold
       font-size: 13px
       border: 1px solid black
-      padding-top: 2px
+      padding-top: 1px
       border-bottom: none
     #players-list
-      height: 410px
+      height: 439px
       overflow-y: scroll
-      padding: 2px
+      padding: 1px
       border: 1px solid black
 
   .player-slots
@@ -154,9 +157,10 @@ html, body
     padding: 4px 2px 4px 4px
     white-space: pre-line
     background: $bgGray
-    height: 603px
+    height: 627px
     border: 1px solid black
-    overflow-y: scroll
+    overflow-y: hidden
+    color: #4d4d4d
 
 .copyright
   position: fixed

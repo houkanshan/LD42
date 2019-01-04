@@ -17,12 +17,12 @@ var unescaper = /\\(\\|'|r|n|t|u2028|u2029)/g
 
 // Within an interpolation, evaluation, or escaping, remove HTML escaping
 // that had been previously added.
-var unescape = function(code) {
+export var unescape = function(code) {
   return code.replace(unescaper, function(match, escape) {
     return escapes[escape]
   })
 }
-var escape = function(str) {
+export var escape = function(str) {
     str = '' + str || ''
     var xmlchar = {
       '&': '&amp;'

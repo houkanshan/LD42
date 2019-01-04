@@ -1,7 +1,14 @@
 <div id="leader-board">
   <label>Figure 4.</label>
   <div class="table">
-    <table>
+    <table style="border-collapse: collapse;">
+      <tbody class="title-container">
+        <tr><td colspan="4">
+          <span class="title">- Leaderboard -</span>
+        </td></tr>
+      </tbody>
+    </table>
+    <table style="margin-top: -1px">
       <thead>
         <tr>
           <th width="43"></th>
@@ -10,11 +17,6 @@
           <th width="71"></th>
         </tr>
       </thead>
-      <tbody class="title-container">
-        <tr><td colspan="4">
-          <span class="title">- Leaderboard -</span>
-        </td></tr>
-      </tbody>
       <tbody class="leader-board-container">
       </tbody>
     </table>
