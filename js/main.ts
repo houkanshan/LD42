@@ -60,7 +60,7 @@ function initMainPage() {
   $('.player-slots .number').text(`${playerCount} / 12`)
 
   // Log
-  $('#log').html(Data.log.map(function(l) {
+  $('#log').html(Data.log.reverse().map(function(l) {
     let text = escape(l.text).replace(/\[(.+?)( \(\))?\]/g, function(m, p1, p2) {
       if (!userMap[p1]) { return `<b>[${p1}]</b>`}
       if (p2) {
@@ -70,7 +70,7 @@ function initMainPage() {
     })
     return `[${l.create_time}] ${text}`
   }).join('\n'))
-  $('#log')[0].scrollTop = $('#log')[0].scrollHeight
+  // $('#log')[0].scrollTop = $('#log')[0].scrollHeight
 
   // Profile
   $('#my-level').text(Data.me.level)

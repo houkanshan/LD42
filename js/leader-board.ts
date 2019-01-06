@@ -19,6 +19,15 @@ export default function() {
   const container = $('.leader-board-container')
   container
     .html(listHtml)
+
+  $('#leader-board-update-time').text(
+    formatDate(offlineUsers.sort((a, b) =>
+      b.offline_time === a.offline_time ? 0 :
+        b.offline_time > a.offline_time ? 1 : -1
+    )[0].offline_time) + ' +0000'
+  )
+
+  container
     .on('mouseenter', '.btn-message', function(e) {
       const target = $(e.target)
       const text = target.data('message')
@@ -27,18 +36,20 @@ export default function() {
         .text(text || 'N/A')
         .css({
           top: offset.top,
-          left: offset.left + target.width() - 250,
+          left: offset.left + target.outerWidth() - 250,
           width: 240,
         }).appendTo(document.body)
       target.data('popup', message)
     })
-
-  $('#leader-board-update-time').text(
-    formatDate(offlineUsers.sort((a, b) =>
-      b.offline_time === a.offline_time ? 0 :
-        b.offline_time > a.offline_time ? 1 : -1
-    )[0].offline_time) + ' +0000'
-  )
+    .on('mouseleave', '.btn-message', function(e) {
+      if ($(e.relatedTarget).closest('.message-content').length) {
+        return
+      }
+      const popup = $(e.currentTarget).data('popup')
+      if (popup) {
+         popup.remove()
+      }
+    })
 
   $(document.body).on('mouseleave', '.message-content', function(e) {
     $(e.currentTarget).remove()

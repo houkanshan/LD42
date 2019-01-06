@@ -8,13 +8,13 @@ require_once('./libs/utils.php');
 date_default_timezone_set('UTC');
 
 define('DEV', false);
-define("VERSION", 19);
+define("VERSION", 20);
 define('FILE_LOG', "log.txt");
-define('IP_LIMIT', 3);
+define('IP_LIMIT', 30);
 define('MIN_UPDATE_INTERVAL', 12); // hour
 define('MIN_STORY_INTERVAL', 6); // hour
 define('PLAYER_SLOTS', 12); // hour
-define('CHECK_INTERVAL', 48); // hour
+define('CHECK_INTERVAL', 12); // hour
 $GLOBALS['AVATARS'] = range('1', '20');
 $GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
 
@@ -105,7 +105,7 @@ function create_user($user) {
   $db = db();
   $users = $db->user();
 
-  if ($users->where('offline_time', null)->count("'ip' = '".$user['ip']."'") >= IP_LIMIT) {
+  if ($users->where('offline_time', null)->where('ip', $user['ip'])->count() >= IP_LIMIT) {
     raise_e('Error: Each individual IP address is only allowed to possess up to '.IP_LIMIT.' characters.');
   }
 
@@ -122,8 +122,9 @@ function create_user($user) {
   $db->commit();
   add_log('Player ['.$user['name'].'] has joined the game.');
 
-  if ($users->count() == PLAYER_SLOTS) {
+  if ($db->user()->where('offline_time', null)->count() == PLAYER_SLOTS) {
     add_log('Maximum players reached, the countdown timer has been initialized.');
+    set_last_check_time();
   }
   return $db->user($user['name']);
 }
@@ -209,8 +210,6 @@ function get_all_users() {
   $db = db();
   $users = $db->user()->fetchAll();
 
-
-
   $users_data = array();
   foreach($users as $u) {
     $data = $u->getData();
@@ -269,6 +268,16 @@ function get_log() {
   return db()->log()->fetchAll();
 }
 
+function set_last_check_time() {
+  $db = db();
+  $misc_values = $db->misc()->fetchAll()[0];
+  $misc_values->last_checking_time = getDbNow();
+
+  $db->begin();
+  $misc_values->save();
+  $db->commit();
+}
+
 function check_slots() {
   $db = db();
   $misc_values = $db->misc()->fetchAll()[0];
@@ -286,7 +295,7 @@ function check_slots() {
     $exceeded_count = count($online_users) - PLAYER_SLOTS;
     $selected_users = array();
     $now = getDbNow();
-    if ($exceeded_count > 0) {
+    if ($exceeded_count >= 0) {
       $player_names = array();
       // $selected_indexes = array_rand($online_users, $exceeded_count);
       // if ($exceeded_count == 1) {

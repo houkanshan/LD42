@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $user = array(
     'name' => substr(trim($_POST['name']), 0, 20),
     'raw_password' => $_POST['raw_password'],
-    'message' => trim(str_replace("\n", " ", $_POST['message'])),
+    // 'message' => trim(str_replace("\n", " ", $_POST['message'])),
     'avatar' => $_POST['avatar'],
     'ip' => $ip,
   );
