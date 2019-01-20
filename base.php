@@ -8,13 +8,13 @@ require_once('./libs/utils.php');
 date_default_timezone_set('UTC');
 
 define('DEV', false);
-define("VERSION", 20);
+define("VERSION", 21);
 define('FILE_LOG', "log.txt");
-define('IP_LIMIT', 30);
+define('IP_LIMIT', 3);
 define('MIN_UPDATE_INTERVAL', 12); // hour
 define('MIN_STORY_INTERVAL', 6); // hour
 define('PLAYER_SLOTS', 12); // hour
-define('CHECK_INTERVAL', 12); // hour
+define('CHECK_INTERVAL', 48); // hour
 $GLOBALS['AVATARS'] = range('1', '20');
 $GLOBALS['ADMINS'] = array('Houmai', 'Zerotonin');
 
@@ -99,7 +99,7 @@ function create_user($user) {
 
   $existed_user = get_user($user['name']);
   if ($existed_user) {
-    raise_e('Error: An player with the same username already exists.');
+    raise_e('Error: A player with the same username already exists or existed.');
   }
 
   $db = db();
@@ -276,6 +276,12 @@ function set_last_check_time() {
   $db->begin();
   $misc_values->save();
   $db->commit();
+}
+
+function get_last_check_time() {
+  $db = db();
+  $misc_values = $db->misc()->fetchAll()[0];
+  return $misc_values->last_checking_time;
 }
 
 function check_slots() {

@@ -28,7 +28,7 @@
   .field-info
     vertical-align: top
     display: inline-block
-    .field
+    .field:not(:last-child)
       margin-bottom: 17px
     input[type=text]
     input[type=password]
@@ -44,6 +44,7 @@
     margin: 0 auto
     text-align: left
     position: relative
+    margin-top: 17px
     input
       position: absolute
       left: -20px
@@ -94,7 +95,7 @@
         margin: 1px
         cursor: pointer
   .error
-    text-align: left
+    text-align: center
     color: $red
-    width: 210px
-    margin: 10px auto 0
+    margin: 14px auto 0
+    white-space: pre

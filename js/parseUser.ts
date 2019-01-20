@@ -20,6 +20,7 @@ export default function parseUser(user) {
 
   user.name = user.name.slice(0, 10)
   user.create_date = user.create_time.slice(0, 10)
+  user.offline_date = user.offline_time && user.offline_time.slice(0, 10)
   user.update_date = user.update_time && user.update_time.slice(0, 10)
   user.story_date = user.story_time && user.story_time.slice(0, 10)
 

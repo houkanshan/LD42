@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   try {
     $user = login_user($user);
     if ($user['offline_time']) {
-      $error = "The character you previously logged into has been removed from the game to make space for future players. You can still rejoin the game by creating a new character.";
+      $error = "The character you previously logged into has been removed from the game to make space for future players. \nYou can still rejoin the game by creating a new character.";
     } else {
       redirect('/');
     }
@@ -61,9 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
       <?php if ($error): ?>
-        <div class="error">
-          <?php echo $error ?>
-        </div>
+        <div class="error"><?php echo trim($error) ?></div>
       <?php endif;?>
       <div class="actions">
         <button type="submit">Login</button>

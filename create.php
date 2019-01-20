@@ -13,11 +13,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'ip' => $ip,
   );
   try {
-    $new_user = create_user($user);
-    login_user($new_user);
+    if (!$user['name']) {
+      raise_e("Error: Please fill in all fields before proceeding.");
+    }
+    if (!$user['password'] && !$user['raw_password']) {
+      raise_e("Error: Please fill in all fields before proceeding.");
+    }
     if (!$_POST['agree']) {
       throw new Exception('Please tick the checkbox to ensure your optimal gaming experience.');
     }
+    $new_user = create_user($user);
+    login_user($new_user);
     redirect('/');
   } catch (Exception $e) {
     $error = $e->getMessage();
@@ -89,9 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
       <?php if ($error): ?>
-        <div class="error">
-          <?php echo $error ?>
-        </div>
+        <div class="error"><?php echo trim($error) ?></div>
       <?php endif;?>
       <div class="actions">
         <button type="submit">Create Character</button>

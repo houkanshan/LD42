@@ -24,7 +24,7 @@ export default function() {
     formatDate(offlineUsers.sort((a, b) =>
       b.offline_time === a.offline_time ? 0 :
         b.offline_time > a.offline_time ? 1 : -1
-    )[0].offline_time) + ' +0000'
+    )[0].offline_time, true) + ' +0000'
   )
 
   container
