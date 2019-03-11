@@ -1,0 +1,16 @@
+
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+<files ~ "\.sqlite3$">
+order allow,deny
+deny from all
+</files>
+
+Options All -Indexes
+ServerSignature Off
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+

@@ -45,15 +45,15 @@ if ($user['offline_time']) {
           <table>
             <thead>
               <tr>
-                <th width="85">Date Joined</th>
-                <th width="75">Location</th>
+                <th width="80">Date Joined</th>
+                <th width="80">Location</th>
                 <th width="43">Level</th>
                 <th width="43">Score</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><?php echo formatDate($user['create_time']) ?></td>
+                <td><?php echo formatDateShort($user['create_time']) ?></td>
                 <td><?php echo formatIp($user['ip']) ?></td>
                 <td id="my-level"></td>
                 <td id="my-score"></td>

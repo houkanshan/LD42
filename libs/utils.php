@@ -112,6 +112,9 @@ function getDbDate($date) {
 function formatDate($str) {
   return (new DateTime($str))->format('D, j M Y');
 }
+function formatDateShort($str) {
+  return (new DateTime($str))->format('j M Y');
+}
 
 function dateIntervalTimestamp($delta) {
   return ($delta->s)

@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <?php include('./include/head.php') ?>
-<body>
+<body class="page-create">
   <div class="account-main">
     <h1 class="login-title">More Players Are Welcomed!</h1>
     <h2 class="login-subtitle">(but Seats Are Limited)</h2>
