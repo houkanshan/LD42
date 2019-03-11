@@ -45,8 +45,8 @@ if ($user['offline_time']) {
           <table>
             <thead>
               <tr>
-                <th width="80">Date Joined</th>
-                <th width="80">Location</th>
+                <th width="75">Date Joined</th>
+                <th width="85">Location</th>
                 <th width="43">Level</th>
                 <th width="43">Score</th>
               </tr>

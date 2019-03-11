@@ -8,7 +8,7 @@ require_once('./libs/utils.php');
 date_default_timezone_set('UTC');
 
 define('DEV', false);
-define("VERSION", 22);
+define("VERSION", 23);
 define('FILE_LOG', "log.txt");
 define('IP_LIMIT', 3);
 define('MIN_UPDATE_INTERVAL', 12); // hour
