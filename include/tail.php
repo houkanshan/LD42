@@ -2,6 +2,8 @@
 require_once('./base.php');
 ?>
 
+<div id="mobile-alert">
+</div>
 
 <script>
   Data = window.Data || {};

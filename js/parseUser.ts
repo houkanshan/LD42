@@ -25,7 +25,7 @@ export default function parseUser(user) {
   user.story_date = user.story_time && user.story_time.slice(0, 10)
 
   user.level = +user.level + days
-  user.score = +user.score + Math.floor(hours / 2)
+  user.score = +user.score + Math.floor(hours / 3)
 
   user.parsed = true
   return user
