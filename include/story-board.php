@@ -1,6 +1,8 @@
 <div class="story-board-wrapper">
   <div id="story-board">
-    <a class="da-knil" href="/centrifuge/LD41/" target="_blank"></a>
+    <a class="da-knil" href="/centrifuge/LD41/" target="_blank">
+      <span class="close"></span>
+    </a>
     <table style="border-collapse: collapse; margin-bottom: -1px">
       <thead>
         <tr><th>

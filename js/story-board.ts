@@ -38,12 +38,14 @@ export default function() {
           }).appendTo(document.body)
         target.data('popup', message)
       })
-
     }
   })
 
-  $(document.body).on('mouseleave', '.message-content', function(e) {
-    $(e.currentTarget).remove()
+  $(document.body).on('mousemove', function(e) {
+    const el = document.elementFromPoint(e.clientX, e.clientY)
+    const isIn = $(el).closest('.message-content').length
+    if (!isIn) {
+      $('.message-content').remove()
+    }
   })
-
 }

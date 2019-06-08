@@ -6,6 +6,8 @@
   right: 0
   top: 8px
   background: url(../../pics/banner1.jpg) right top \/ 137px 575px no-repeat
+  &.closed
+    display: none
   label
     float: right
   .da-knil
@@ -15,9 +17,18 @@
     z-index: 1
     width: 137px
     height: 575px
+  .close
+    position: absolute
+    right: 0
+    top: 0
+    width: 15px
+    height: 15px
+
 
 #story-board
   background: white
+  &.closed
+    display: none
   th
     padding: 10px 0
     font-weight: normal

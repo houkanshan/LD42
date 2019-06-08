@@ -13,7 +13,7 @@
       <p>As a player, you are able to:</p>
       <ul>
         <li><strong>Personalize your Bio</strong> as a way to introduce yourself and communicate with other active players. You may only edit your bio once per 12 hours, and each such action that succeed will score you 5 pts.
-        <li><strong>Share your success story,</strong> which will then be displayed on the homepage to encourage or discourage all potential players from joining the game. You may only edit your shared story once per 6 hours, and each such valid action that succeed will score you 3 pts.
+        <li><strong>Share your success story,</strong> which will then be displayed on the homepage to encourage or discourage all potential players from joining the game. You may only edit your shared story once per 6 hours, and each such action that succeed will score you 3 pts.
         <li><strong>Just stay there,</strong> and simply be yourself. You gain 1 Level-up after each passing day (the timer resets at every midnight, GMT time). Additionally, 1 bonus point will be awarded to you every 3 hours. (As long as you are among the active players list, you DO NOT have to stay logged in or have the page open in your browser for this to work.)
         <li><strong>Log out current session</strong> to get back to the homepage, wherein you are able to create a new character or login as another existing character. Each individual IP address is allowed to possess up to 3 characters.
       </ul>
