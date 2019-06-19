@@ -58,6 +58,26 @@ function initMainPage() {
       playerCount < 8 ? 'green' : playerCount < 12 ? 'yellow' : 'red'
     )
   $('.player-slots .number').text(`${playerCount} / 12`)
+  // players count down
+  const lastCheckTime = new Date(Data.lastCheckTime.replace(' ', 'T') + '.000Z')
+  const cleanTime = lastCheckTime.valueOf() + 48 * 60 * 60 * 1000
+  const timeEl = $('.players-countdown time')[0]
+  function padZero(n) { return (n/100).toFixed(2).slice(2) }
+  function tick() {
+    const span = Math.max(0, cleanTime - Date.now())
+    const spanDate = new Date(span)
+    timeEl.textContent = [
+      Math.floor(span/3600/1000),
+      padZero(spanDate.getMinutes()),
+      padZero(spanDate.getSeconds()) + '.' +
+      spanDate.getMilliseconds(),
+    ].join(':')
+    setTimeout(tick, 54)
+  }
+  if (playerCount >= 12) {
+    tick()
+    $('.players-countdown').show()
+  }
 
   // Log
   $('#log').html(Data.log.reverse().map(function(l) {

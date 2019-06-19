@@ -128,6 +128,10 @@ if ($user['offline_time']) {
         <div class="number">0/12</div>
       </div>
     </div>
+    <div class="players-countdown" style="display: none">
+      <p>Automatic clean-up in <time></time></p>
+      <p>All players will be removed by then if no action was taken.</p>
+    </div>
   </div>
   <div class="right">
     <div class="fieldset">
@@ -147,6 +151,7 @@ if ($user['offline_time']) {
     Data.canUpdateMessage = <?php echo json_encode(can_update_message($user)) ?>;
     Data.canUpdateStory = <?php echo json_encode(can_update_story($user)) ?>;
     Data.log = <?php echo json_encode(get_log()) ?>;
+    Data.lastCheckTime = '<?php echo get_last_check_time() ?>';
   </script>
   <?php include('./include/tail.php') ?>
   <script>
