@@ -9,7 +9,7 @@ export default function() {
   const tmplStoryBoardItem = template($('#tmpl-story-board-item').html())
   const listHtml = Data.users
   .filter(u => u.story)
-  .sort((a, b) => a.story_time > b.story_time ? 1 : -1)
+  .sort((a, b) => a.story_time > b.story_time ? -1 : 1)
   .slice(0, 10)
   .map(function(u) {
     return tmplStoryBoardItem({ ...u, formatDate })
