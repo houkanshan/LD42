@@ -130,7 +130,7 @@ if ($user['offline_time']) {
     </div>
     <div class="players-countdown" style="display: none">
       <p>Automatic clean-up in <time></time></p>
-      <p>All players will be removed by then if no action was taken.</p>
+      <p>All players will be removed by then if no action is taken.</p>
     </div>
   </div>
   <div class="right">
