@@ -62,7 +62,7 @@ function initMainPage() {
   const lastCheckTime = new Date(Data.lastCheckTime.replace(' ', 'T') + '.000Z')
   const cleanTime = lastCheckTime.valueOf() + 48 * 60 * 60 * 1000
   const timeEl = $('.players-countdown time')[0]
-  function padZero(n, c = 2) { return (n/100).toFixed(c).slice(c) }
+  function padZero(n, c = 2) { return (n/Math.pow(10, c)).toFixed(c).slice(2) }
   function tick() {
     const span = Math.max(0, cleanTime - Date.now())
     const spanDate = new Date(span)

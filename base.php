@@ -8,7 +8,7 @@ require_once('./libs/utils.php');
 date_default_timezone_set('UTC');
 
 define('DEV', false);
-define("VERSION", 29);
+define("VERSION", 31);
 define('FILE_LOG', "log.txt");
 define('IP_LIMIT', 3);
 define('MIN_UPDATE_INTERVAL', 12); // hour
@@ -292,7 +292,7 @@ function check_slots() {
   $span = $last_time->diff(new DateTime('now'));
   $interval_span = new DateInterval('PT'.CHECK_INTERVAL.'H');
   if (
-    dateIntervalTimestamp($span) > dateIntervalTimestamp($interval_span)
+    dateIntervalTimestamp($span) >= dateIntervalTimestamp($interval_span)
   ) {
     $fake_check_time = $last_time->add($interval_span);
     $misc_values->last_checking_time = getDbNow();
